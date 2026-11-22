@@ -1,0 +1,3089 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Nescom Marketing | Elevators, Escalators & Vertical Transportation —
+      Pakistan
+    </title>
+    <meta
+      name="description"
+      content="Nescom Marketing engineers and installs passenger, Cargo, hospital, panoramic, residential and home elevators plus escalators across Pakistan."
+    />
+    <link rel="icon" href="images/nescom-logo-hd.png" />
+    <style>
+      :root {
+        --bg: #f8f6f3;
+        --bg-alt: #efece5;
+        --surface: #fdfcfa;
+        --surface-2: #e8e4dc;
+        --border: #ddd8cd;
+        --border-soft: #e4e0d6;
+
+        --red: #d81f2b;
+        --red-dark: #99131c;
+        --red-glow: rgba(216, 31, 43, 0.22);
+
+        --ink: #12151f;
+        --ink-dim: #4b5468;
+        --ink-faint: #7b8397;
+
+        /* aliases for shared nav/footer/social components */
+        --text: var(--ink);
+        --text-dim: var(--ink-dim);
+        --text-faint: var(--ink-faint);
+
+        --radius: 2px;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --maxw: 1280px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      .eyebrow {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--red);
+      }
+
+      /* ---------------- NAV ---------------- */
+      /* ---------------- JOURNEY (merged continuous scroll sequence) ---------------- */
+      .journey-scroll-scene {
+        position: relative;
+        height: 1900vh;
+        background: #090b0f;
+      }
+      .journey-scene {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        min-height: 640px;
+        overflow: hidden;
+        background: #0c0f13;
+        isolation: isolate;
+      }
+      .journey-scene video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 0;
+        background: #dfe3e6;
+      }
+      .hero-poster {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        transition: opacity 0.45s ease;
+      }
+      .journey-scene.video-ready .hero-poster {
+        opacity: 0;
+      }
+      .journey-label {
+        position: absolute;
+        z-index: 3;
+        top: clamp(86px, 10vh, 110px);
+        left: clamp(1.25rem, 4vw, 3rem);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: rgba(255, 255, 255, 0.82);
+        font:
+          500 0.66rem/1.2 "IBM Plex Mono",
+          "Courier New",
+          monospace;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        transition: opacity 0.3s ease;
+      }
+      .journey-label::before {
+        content: "";
+        width: 34px;
+        height: 1px;
+        background: var(--red);
+        box-shadow: 0 0 14px rgba(216, 31, 43, 0.55);
+      }
+      @media (max-width: 700px) {
+        .journey-scroll-scene {
+          height: 1500vh;
+        }
+        .journey-label {
+          top: 78px;
+          left: 16px;
+        }
+      }
+
+      /* ---------------- COMPONENTS / SPECIFICATION CARDS ---------------- */
+      .components-section {
+        background: var(--ink);
+        color: #fff;
+        overflow: hidden;
+        position: relative;
+      }
+      .components-section .blob-comp {
+        position: absolute;
+        width: 32vw;
+        height: 32vw;
+        top: -6vw;
+        left: -8vw;
+        border-radius: 50%;
+        filter: blur(70px);
+        background: radial-gradient(
+          circle,
+          rgba(216, 31, 43, 0.16),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .components-head {
+        position: relative;
+        z-index: 1;
+        max-width: 640px;
+      }
+      .components-head .eyebrow {
+        color: #ffb0a8;
+      }
+      .components-head h2 {
+        font-size: clamp(1.9rem, 4.2vw, 3.2rem);
+        text-transform: uppercase;
+        line-height: 1.08;
+        margin-top: 0.9rem;
+        letter-spacing: -0.01em;
+      }
+      .components-head p {
+        margin-top: 1.1rem;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 1.02rem;
+        line-height: 1.65;
+        max-width: 56ch;
+      }
+      .components-grid {
+        position: relative;
+        z-index: 1;
+        margin-top: 3.2rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.1rem;
+        counter-reset: comp;
+      }
+      @media (max-width: 980px) {
+        .components-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 560px) {
+        .components-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .component-card {
+        counter-increment: comp;
+        position: relative;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        padding: 1.7rem 1.5rem 1.9rem;
+        opacity: 0;
+        transform: translateY(46px) scale(0.97);
+        filter: blur(3px);
+        transition:
+          opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 0.75s ease,
+          border-color 0.3s ease,
+          background 0.3s ease;
+      }
+      .component-card.is-up {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+      .component-card:hover {
+        border-color: rgba(216, 31, 43, 0.5);
+        background: rgba(255, 255, 255, 0.065);
+      }
+      .component-card::before {
+        content: counter(comp, decimal-leading-zero);
+        position: absolute;
+        top: 1.4rem;
+        right: 1.5rem;
+        font:
+          500 0.72rem/1 "IBM Plex Mono",
+          "Courier New",
+          monospace;
+        color: rgba(255, 255, 255, 0.28);
+        letter-spacing: 0.1em;
+      }
+      .component-card {
+        padding: 0 0 1.6rem;
+        overflow: hidden;
+      }
+      .component-image {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 16px 16px 0 0;
+        overflow: hidden;
+        margin-bottom: 1.2rem;
+        position: relative;
+        background: linear-gradient(160deg, #1c2028 0%, #0e1015 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.9rem;
+      }
+      .component-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .component-card:hover .component-image img {
+        transform: scale(1.06);
+      }
+      .component-card h3 {
+        font-size: 1.05rem;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        color: #fff;
+        padding: 0 1.5rem;
+      }
+      .component-card p {
+        margin-top: 0.6rem;
+        font-size: 0.87rem;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.62);
+        padding: 0 1.5rem;
+      }
+      .hero-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(8, 10, 14, 0.72) 0%,
+            rgba(8, 10, 14, 0.28) 48%,
+            rgba(8, 10, 14, 0.12) 100%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(8, 10, 14, 0.2) 0%,
+            rgba(8, 10, 14, 0.06) 42%,
+            rgba(8, 10, 14, 0.76) 100%
+          );
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+        pointer-events: none;
+      }
+      .hero-copy {
+        position: absolute;
+        left: clamp(1.25rem, 4vw, 3rem);
+        right: clamp(1.25rem, 4vw, 3rem);
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 980px;
+        opacity: 0;
+        filter: blur(8px);
+        will-change: opacity, transform, filter;
+      }
+      .hero-copy.is-active {
+        filter: blur(0);
+      }
+      .hero-eyebrow {
+        color: #ffb0a8;
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        letter-spacing: 0.3em;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        margin-bottom: 1.4rem;
+      }
+      .hero-title {
+        font-size: clamp(2rem, 6vw, 6.4rem);
+        color: #fff;
+        line-height: 1.02;
+        text-transform: uppercase;
+        font-weight: 650;
+        text-shadow: 0 18px 55px rgba(0, 0, 0, 0.38);
+      }
+      .hero-title .accent {
+        color: var(--red);
+      }
+      .hero-tagline {
+        margin-top: 1.6rem;
+        font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: clamp(0.95rem, 1.25vw, 1.12rem);
+        max-width: 34ch;
+        line-height: 1.55;
+      }
+      @keyframes cueDrop {
+        0% {
+          top: -100%;
+        }
+        60% {
+          top: 100%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+      .hero-progress {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.15);
+        z-index: 4;
+      }
+      .hero-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--red);
+        box-shadow: 0 0 18px rgba(216, 31, 43, 0.6);
+      }
+      .hero-status {
+        position: absolute;
+        z-index: 3;
+        top: clamp(86px, 10vh, 110px);
+        right: clamp(1.25rem, 4vw, 3rem);
+        padding: 0.7rem 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(8, 10, 14, 0.28);
+        backdrop-filter: blur(10px);
+        color: #fff;
+        font:
+          500 0.64rem/1.2 "IBM Plex Mono",
+          "Courier New",
+          monospace;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .hero-status b {
+        color: var(--red);
+      }
+      @media (max-width: 700px) {
+        .journey-scroll-scene {
+          height: 1500vh;
+        }
+        .journey-scene {
+          min-height: 560px;
+        }
+        .hero-copy {
+          top: 56%;
+          max-width: 92%;
+        }
+        .hero-title {
+          font-size: clamp(2.25rem, 12vw, 4.4rem);
+        }
+        .hero-tagline {
+          font-size: 0.9rem;
+        }
+        .hero-status {
+          top: 76px;
+          right: 16px;
+        }
+      }
+
+      /* ---------------- JOURNEY COPY TYPOGRAPHY (escalator / patient / Cargo segments) ---------------- */
+      .escalator-copy,
+      .patient-copy,
+      .Cargo-copy {
+        position: absolute;
+        left: clamp(1.25rem, 5vw, 5rem);
+        right: clamp(1.25rem, 5vw, 5rem);
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 860px;
+        opacity: 0;
+        filter: blur(8px);
+        will-change: opacity, transform, filter;
+        pointer-events: none;
+      }
+      .escalator-copy.is-active,
+      .patient-copy.is-active,
+      .Cargo-copy.is-active {
+        filter: blur(0);
+      }
+      .eyebrow-video {
+        color: #ffb0a8;
+        font:
+          500 0.7rem/1.2 "IBM Plex Mono",
+          "Courier New",
+          monospace;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        margin-bottom: 1.25rem;
+      }
+      .escalator-copy h2,
+      .patient-copy h2,
+      .Cargo-copy h2 {
+        color: #fff;
+        font-size: clamp(2.55rem, 6vw, 6.2rem);
+        line-height: 1;
+        letter-spacing: -0.045em;
+        text-transform: uppercase;
+        text-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      }
+      .escalator-copy p,
+      .patient-copy p,
+      .Cargo-copy p {
+        margin-top: 1.35rem;
+        max-width: 56ch;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: clamp(0.94rem, 1.25vw, 1.13rem);
+        line-height: 1.65;
+      }
+      .escalator-about,
+      .patient-focus,
+      .Cargo-focus {
+        top: auto;
+        bottom: clamp(56px, 8vh, 92px);
+        transform: none;
+        max-width: min(1000px, 88vw);
+        padding: clamp(1.75rem, 3.6vw, 3rem);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(8, 10, 14, 0.52);
+        backdrop-filter: blur(16px) saturate(120%);
+        border-radius: 20px;
+        box-shadow: 0 26px 100px rgba(0, 0, 0, 0.34);
+        pointer-events: auto;
+      }
+      .escalator-about h2,
+      .patient-focus h2,
+      .Cargo-focus h2 {
+        font-size: clamp(2rem, 4.4vw, 4.4rem);
+        max-width: 19ch;
+        line-height: 1.12;
+        margin-bottom: 0.3rem;
+      }
+      .escalator-about h2 .w,
+      .patient-focus h2 .w,
+      .Cargo-focus h2 .w {
+        opacity: 1 !important;
+      }
+      .escalator-about p,
+      .patient-focus p,
+      .Cargo-focus p {
+        margin-top: 1.7rem;
+      }
+      .escalator-about .link-arrow,
+      .patient-focus .link-arrow,
+      .Cargo-focus .link-arrow {
+        margin-top: 1.9rem;
+        color: #fff;
+      }
+      @media (max-width: 700px) {
+        .escalator-copy,
+        .patient-copy,
+        .Cargo-copy {
+          top: 55%;
+          max-width: 92%;
+        }
+        .escalator-copy h2,
+        .patient-copy h2,
+        .Cargo-copy h2 {
+          font-size: clamp(2.15rem, 11vw, 4.2rem);
+        }
+        .escalator-copy p,
+        .patient-copy p,
+        .Cargo-copy p {
+          font-size: 0.88rem;
+        }
+        .escalator-about,
+        .patient-focus,
+        .Cargo-focus {
+          left: 16px;
+          right: 16px;
+          bottom: 64px;
+          max-width: none;
+        }
+        .escalator-about h2,
+        .patient-focus h2,
+        .Cargo-focus h2 {
+          font-size: clamp(1.75rem, 8.2vw, 3rem);
+        }
+      }
+
+      /* ---------------- SECTION SHARED ---------------- */
+      section {
+        position: relative;
+      }
+      .statement {
+        font-size: clamp(1rem, 2vw, 2rem);
+        line-height: 1;
+        letter-spacing: -0.01em;
+        margin-bottom: 1.2rem;
+      }
+      .statement .w {
+        display: inline-block;
+        opacity: 0.16;
+        margin-right: 0.24em;
+      }
+      .body-text {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--ink-dim);
+        max-width: 58ch;
+      }
+      .link-arrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 400;
+        font-size: 0.88rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: 2px;
+      }
+      .link-arrow svg {
+        width: 15px;
+        height: 15px;
+        transition: transform 0.25s var(--ease);
+      }
+      .link-arrow:hover svg {
+        transform: translateX(4px);
+      }
+
+      /* ---------------- ABOUT / INTRO ---------------- */
+      .about-section {
+        background: var(--bg);
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 3rem;
+        align-items: end;
+      }
+      @media (max-width: 860px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---------------- REVEAL IMAGE (radial mask like Lawn&Looms) ---------------- */
+      .reveal-section {
+        background: var(--ink);
+        color: #fff;
+      }
+      .reveal-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+      @media (max-width: 900px) {
+        .reveal-inner {
+          grid-template-columns: 1fr;
+        }
+      }
+      .reveal-statement {
+        font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+      }
+      .reveal-statement .hl {
+        color: var(--red);
+      }
+      .reveal-wrap {
+        position: relative;
+        aspect-ratio: 4/3;
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #1b1f27;
+      }
+      .reveal-wrap img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .reveal-outline {
+        filter: grayscale(1) brightness(0.5) contrast(1.1);
+      }
+      .reveal-fill {
+        -webkit-mask-image: radial-gradient(
+          circle at 50% 50%,
+          #000 0px,
+          transparent 0px
+        );
+        mask-image: radial-gradient(
+          circle at 50% 50%,
+          #000 0px,
+          transparent 0px
+        );
+      }
+
+      /* ---------------- PROCESS: PINNED HORIZONTAL SCROLL ---------------- */
+      .process-scene {
+        height: 500vh;
+        background: var(--bg-alt);
+      }
+      .process-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .process-head {
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+        margin-bottom: 2.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .process-track {
+        display: flex;
+        gap: 1.6rem;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+        will-change: transform;
+      }
+      .process-card {
+        flex: 0 0 auto;
+        width: min(78vw, 480px);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .process-card .img-wrap {
+        aspect-ratio: 16/10;
+        overflow: hidden;
+      }
+      .process-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .process-card .body {
+        padding: 1.6rem 1.7rem 1.9rem;
+      }
+      .process-card .step {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        color: var(--red);
+        text-transform: uppercase;
+      }
+      .process-card h3 {
+        font-size: 1.3rem;
+        margin-top: 0.5rem;
+      }
+      .process-card p {
+        color: var(--ink-dim);
+        font-size: 0.92rem;
+        line-height: 1.6;
+        margin-top: 0.6rem;
+      }
+
+      /* ---------------- COLLECTION GRID ---------------- */
+      .collection-section {
+        background: var(--bg);
+      }
+      .collection-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 2.6rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .collection-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.4rem;
+      }
+      @media (max-width: 980px) {
+        .collection-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 620px) {
+        .collection-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .collection-card {
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+        aspect-ratio: 4/5;
+        background: #111;
+      }
+      .collection-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s var(--ease);
+      }
+      .collection-card:hover img {
+        transform: scale(1.06);
+      }
+      .collection-card .scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) 45%,
+          rgba(0, 0, 0, 0.72) 100%
+        );
+      }
+      .collection-card .cc-body {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1.3rem 1.3rem 1.5rem;
+        color: #fff;
+      }
+      .collection-card .cc-body h4 {
+        font-size: 1.15rem;
+      }
+      .collection-card .cc-body span {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #d8b9a8;
+      }
+      .collection-card .cc-link {
+        position: absolute;
+        top: 1.1rem;
+        right: 1.1rem;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: all 0.3s var(--ease);
+      }
+      .collection-card:hover .cc-link {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .collection-card .cc-link svg {
+        width: 16px;
+        height: 16px;
+        color: #fff;
+      }
+
+      /* ---------------- PROJECTS ---------------- */
+      .projects-section {
+        background: var(--ink);
+        color: #fff;
+      }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.4rem;
+        margin-top: 2.6rem;
+      }
+      @media (max-width: 860px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .project-card {
+        border-radius: var(--radius);
+        overflow: hidden;
+        aspect-ratio: 4/3;
+      }
+      .project-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.05);
+      }
+
+      /* ---------------- WHY / PILLARS ---------------- */
+      .pillars-section {
+        background: var(--bg);
+      }
+      .pillars-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--border);
+        margin-top: 2.6rem;
+        border: 1px solid var(--border);
+      }
+      @media (max-width: 900px) {
+        .pillars-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .pillar {
+        background: var(--surface);
+        padding: 2.2rem 1.8rem;
+      }
+      .pillar .num {
+        font-family: "IBM Plex Mono", "Courier New", monospace;
+        color: var(--red);
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+      }
+      .pillar h4 {
+        font-size: 1.05rem;
+        margin-top: 1rem;
+        line-height: 1.35;
+      }
+      .pillar p {
+        color: var(--ink-dim);
+        font-size: 0.88rem;
+        margin-top: 0.6rem;
+        line-height: 1.6;
+      }
+
+      /* ---------------- CONTACT / FOOTER ---------------- */
+      .contact-section {
+        background: #0a0c11;
+        color: #fff;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+      }
+      @media (max-width: 900px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .contact-title {
+        font-size: clamp(2.1rem, 5vw, 3.6rem);
+        text-transform: uppercase;
+        line-height: 1;
+      }
+      .contact-title .accent {
+        color: var(--red);
+      }
+      .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 2.2rem 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .contact-list a {
+        font-size: 1.05rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        padding-bottom: 0.5rem;
+        display: inline-block;
+      }
+      .form-field {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        padding: 0.85rem 0.2rem;
+        font-family: Inter, sans-serif;
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+      }
+      .form-field::placeholder {
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .form-field:focus {
+        outline: none;
+        border-color: var(--red);
+      }
+      .submit-btn {
+        margin-top: 0.6rem;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        padding: 0.95rem 2.1rem;
+        font-weight: 600;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.25s ease;
+      }
+      .submit-btn:hover {
+        background: var(--red-dark);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        margin-top: 4.5rem;
+        padding-top: 1.6rem;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .footer-bottom a {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .footer-quicklinks {
+        font-size: 1rem !important;
+        font-weight: 500;
+      }
+      .footer-quicklinks a {
+        color: rgba(255, 255, 255, 0.85) !important;
+      }
+      .footer-quicklinks a:hover {
+        color: var(--red) !important;
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      /* ---------------- ORGANIC DESIGN LAYER ---------------- */
+      .grain {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.035;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        pointer-events: none;
+        z-index: 0;
+      }
+      .about-section {
+        overflow: hidden;
+      }
+      .about-section .blob-1 {
+        width: 34vw;
+        height: 34vw;
+        top: -8vw;
+        right: -6vw;
+        background: radial-gradient(circle, var(--red-glow), transparent 70%);
+      }
+      .reveal-section {
+        overflow: hidden;
+      }
+      .reveal-section .blob-2 {
+        width: 30vw;
+        height: 30vw;
+        bottom: -10vw;
+        left: -8vw;
+        background: radial-gradient(
+          circle,
+          rgba(216, 31, 43, 0.18),
+          transparent 70%
+        );
+      }
+      .pillars-section {
+        overflow: hidden;
+      }
+      .pillars-section .blob-3 {
+        width: 28vw;
+        height: 28vw;
+        top: 10%;
+        right: -10vw;
+        background: radial-gradient(
+          circle,
+          rgba(216, 31, 43, 0.08),
+          transparent 70%
+        );
+      }
+
+      .wave-divider {
+        display: block;
+        width: 100%;
+        line-height: 0;
+        position: relative;
+        z-index: 1;
+      }
+      .wave-divider svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .blueprint-art {
+        position: absolute;
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      .about-grid {
+        position: relative;
+        z-index: 1;
+      }
+
+      .marquee-strip {
+        background: var(--ink);
+        overflow: hidden;
+        padding: 1.1rem 0;
+        position: relative;
+        z-index: 1;
+      }
+      .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: marqueeScroll 26s linear infinite;
+      }
+      .marquee-track span {
+        font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        letter-spacing: 0.04em;
+        padding: 0 2.2rem;
+        white-space: nowrap;
+      }
+      .marquee-track span.hl {
+        color: var(--red);
+      }
+      .marquee-track .dot {
+        color: rgba(255, 255, 255, 0.25);
+      }
+      @keyframes marqueeScroll {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      .pillar-icon-badge {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: var(--red-glow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.1rem;
+        transition:
+          background 0.3s ease,
+          transform 0.3s ease;
+      }
+      .pillar:hover .pillar-icon-badge {
+        background: var(--red);
+        transform: scale(1.06);
+      }
+      .pillar-icon {
+        width: 22px;
+        height: 22px;
+        color: var(--red);
+        stroke-width: 1.6;
+        transition: color 0.3s ease;
+      }
+      .pillar:hover .pillar-icon {
+        color: #fff;
+      }
+
+      /* tilt hover for collection cards */
+      .collection-card {
+        transform-style: preserve-3d;
+        will-change: transform;
+        transition: transform 0.15s ease-out;
+      }
+      .collection-card img {
+        transform: translateZ(0);
+      }
+
+      .blueprint-art path,
+      .blueprint-art rect,
+      .blueprint-art line {
+        stroke-dasharray: 500;
+        stroke-dashoffset: 500;
+      }
+      .blueprint-art.drawn path,
+      .blueprint-art.drawn rect,
+      .blueprint-art.drawn line {
+        transition: stroke-dashoffset 1.8s var(--ease);
+        stroke-dashoffset: 0;
+      }
+
+      .process-card {
+        transition:
+          transform 0.5s var(--ease),
+          box-shadow 0.5s var(--ease);
+      }
+      .process-card.in-focus {
+        box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+        transform: translateY(-6px);
+      }
+
+      /* Isolated fallback: only kicks in if the hero video totally fails to load
+     within 4s. Does not affect normal scroll-scrub behavior in any way. */
+      .video-failed .hero-copy[data-start="0"] {
+        opacity: 1 !important;
+        filter: blur(0) !important;
+        transform: translateY(-50%) !important;
+      }
+
+      /* ================= SHARED SITE CHROME (matched to about.html) ================= */
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+      /* ---------- NAV ---------- */
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
+        background: color-mix(in srgb, var(--ink) 22%, transparent);
+        backdrop-filter: blur(18px) saturate(160%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transition:
+          background 0.35s var(--ease),
+          border-color 0.35s var(--ease),
+          padding 0.35s var(--ease),
+          transform 0.35s var(--ease);
+      }
+      .site-nav.nav-hidden {
+        transform: translateY(-100%);
+      }
+      .site-nav.is-scrolled {
+        background: color-mix(in srgb, var(--ink) 48%, transparent);
+        backdrop-filter: blur(22px) saturate(160%);
+        border-bottom: 1px solid var(--border);
+        padding-top: 0.7rem;
+        padding-bottom: 0.7rem;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        z-index: 2;
+      }
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        position: relative;
+        flex: none;
+      }
+      .brand-mark svg {
+        width: 100%;
+        height: 100%;
+      }
+      .brand-text {
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+      }
+      .brand-text span {
+        display: block;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 400;
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        color: var(--red);
+        margin-top: 2px;
+      }
+      .pad {
+        padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+      }
+      .brand-logo {
+        height: 54px;
+        width: auto;
+        display: block;
+      }
+      footer .brand-logo {
+        height: 64px;
+      }
+      .header-logo-video {
+        width: 150px;
+        height: 54px;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+        background: transparent;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2.2rem;
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .nav-links .dropdown {
+        position: relative;
+      }
+
+      .nav-links .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #22262e;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        min-width: 230px;
+        padding: 0.5rem 0;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s var(--ease);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        z-index: 300;
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .nav-links .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .nav-links .dropdown-menu li {
+        width: 100%;
+      }
+
+      .nav-links .dropdown-menu a {
+        display: block;
+        padding: 0.65rem 1.2rem;
+        font-size: 0.82rem;
+        color: #c3c8d1;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      .nav-links .dropdown-menu a::after {
+        display: none;
+      }
+
+      .nav-links .dropdown-menu a:hover {
+        background: #22262e;
+        color: var(--red);
+      }
+
+      .nav-links a {
+        font-size: 0.86rem;
+        font-weight: 500;
+        color: #c9cdd6;
+        position: relative;
+        padding: 0.3rem 0;
+        transition: color 0.25s;
+      }
+      .nav-links a::after {
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        height: 1px;
+        width: 0;
+        background: var(--red);
+        transition: width 0.3s var(--ease);
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: #ffffff;
+      }
+      .nav-links a.active::after,
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--red);
+        color: #fff;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 0.7rem 1.3rem;
+        border: 1px solid var(--red);
+        transition:
+          background 0.25s,
+          color 0.25s,
+          transform 0.25s;
+      }
+      .nav-cta:hover {
+        background: transparent;
+        color: #fff;
+        border-color: #fff;
+      }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: 0;
+        z-index: 210;
+        padding: 0.4rem;
+      }
+      .nav-toggle span {
+        width: 24px;
+        height: 2px;
+        background: #f2f4f8;
+        transition:
+          transform 0.3s var(--ease),
+          opacity 0.3s;
+      }
+      .nav-toggle.is-open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .nav-toggle.is-open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.is-open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .mobile-panel {
+        --bg-alt: #1b1e24;
+        --text: #f2f4f8;
+        --text-dim: #c3c8d1;
+        --border: rgba(255, 255, 255, 0.12);
+        position: fixed;
+        inset: 0;
+        z-index: 150;
+        background: var(--bg-alt);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem clamp(1.5rem, 8vw, 4rem);
+        transform: translateX(100%);
+        transition: transform 0.5s var(--ease);
+      }
+      .mobile-panel.open {
+        transform: translateX(0);
+      }
+      .mobile-panel a {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.9rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .mobile-panel .eyebrow {
+        margin-bottom: 1rem;
+      }
+
+      /* ---------- FLOOR INDICATOR (signature element) ---------- */
+      .floor-indicator {
+        position: fixed;
+        left: 1.6rem;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 120;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.9rem;
+        font-family: "IBM Plex Mono", monospace;
+      }
+      .floor-indicator .rail {
+        width: 1px;
+        height: 110px;
+        background: var(--border);
+        position: relative;
+      }
+      .floor-indicator .car {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translate(-50%, 0);
+        width: 9px;
+        height: 9px;
+        background: var(--red);
+        box-shadow: 0 0 10px var(--red-glow);
+        transition: top 0.25s var(--ease);
+      }
+      .floor-indicator .num {
+        font-size: 0.78rem;
+        color: var(--text-dim);
+        letter-spacing: 0.05em;
+      }
+      .floor-indicator .num b {
+        color: var(--red);
+        font-weight: 600;
+      }
+      @media (max-width: 900px) {
+        .floor-indicator {
+          display: none;
+        }
+      }
+
+      /* ---------- FOOTER ---------- */
+      footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 4rem 0 2rem;
+        background: #1b1e24;
+        --text: #f2f4f8;
+        --text-dim: #c3c8d1;
+        --text-faint: #838c9c;
+        --border: rgba(255, 255, 255, 0.12);
+        --surface: #22262e;
+        --bg-alt: #22262e;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .footer-grid h4 {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-faint);
+        margin-bottom: 1rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 400;
+      }
+      .footer-grid li {
+        margin-bottom: 0.6rem;
+      }
+      .footer-grid a {
+        color: var(--text-dim);
+        font-size: 0.9rem;
+        transition: color 0.2s;
+      }
+      .footer-grid a:hover {
+        color: var(--red);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 3rem;
+        padding-top: 1.6rem;
+        border-top: 1px solid var(--border);
+        color: var(--text-faint);
+        font-size: 0.78rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      @media (max-width: 800px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ================= SOCIAL LINKS (base, all screen sizes) ================= */
+      .social-links-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 1.2rem;
+      }
+      .social-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.45rem 0.85rem;
+        background-color: #d81f2b;
+        color: #ffffff;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 500;
+        transition: all 0.3s var(--ease);
+        transform-style: preserve-3d;
+      }
+      .footer-grid .social-links-wrapper a.social-btn,
+      .social-links-wrapper a.social-btn,
+      .social-links-wrapper a.social-btn span {
+        color: #ffffff !important;
+      }
+      .social-btn svg {
+        width: 15px !important;
+        height: 15px !important;
+        fill: #ffffff !important;
+        flex-shrink: 0;
+        transition: transform 0.3s var(--ease);
+      }
+      .social-btn:hover,
+      .social-btn:focus-visible {
+        background-color: #ff3b3b;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(216, 31, 43, 0.35);
+      }
+      .social-btn:hover svg,
+      .social-btn:focus-visible svg {
+        fill: #ffffff !important;
+        transform: scale(1.15);
+      }
+      .social-btn:active {
+        transform: translateY(0);
+      }
+
+      /* ---------- CTA BAND (home page) ---------- */
+      .cta-home-section {
+        background: var(--ink);
+        padding: 0 0 clamp(3.5rem, 8vw, 6rem);
+      }
+      .cta-band {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: linear-gradient(
+          115deg,
+          #1b1e24 0%,
+          #1b1e24 55%,
+          rgba(216, 31, 43, 0.18) 100%
+        );
+        color: #fff;
+        padding: clamp(2.5rem, 6vw, 4rem);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-band::after {
+        content: "";
+        position: absolute;
+        right: -40px;
+        top: -40px;
+        width: 220px;
+        height: 220px;
+        border: 1px solid var(--red);
+        opacity: 0.25;
+        border-radius: 50%;
+      }
+      .cta-band h3 {
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        max-width: 480px;
+        color: #fff;
+      }
+      @media (max-width: 900px) {
+        .cta-band {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 2rem 1.4rem;
+        }
+        .cta-band .nav-cta {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      /* ----- shared nav — hamburger flip (from about.html) ----- */
+      @media (max-width: 900px) {
+        .nav-links,
+        nav.site-nav .nav-cta {
+          display: none;
+        }
+        nav.site-nav .nav-toggle {
+          display: flex;
+        }
+        .floor-indicator {
+          display: none;
+        }
+      }
+
+      /* ---------- UNIVERSAL INTERACTIVE CLICK FIX ---------- */
+      /* Decorative animation layers must never sit above interactive controls. */
+      .blueprint-grid,
+      .grain,
+      .hero::before,
+      .hero::after,
+      .page-head::before,
+      .page-head::after,
+      .cta-band::before,
+      .cta-band::after,
+      [aria-hidden="true"] {
+        pointer-events: none !important;
+      }
+      a,
+      button,
+      input,
+      textarea,
+      select {
+        pointer-events: auto !important;
+      }
+      .btn,
+      .cta-btn,
+      .nav-cta,
+      .hero-actions a,
+      .cta-band a,
+      .page-head a {
+        position: relative !important;
+        z-index: 20 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+      }
+
+      /* ---------- CTA / LINK CLICK FIX ---------- */
+      .nav-cta {
+        position: relative !important;
+        z-index: 210 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+      }
+      .cta-band::after {
+        pointer-events: none !important;
+      }
+      .cta-band .btn {
+        position: relative !important;
+        z-index: 2 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+      }
+    </style>
+
+    <style>
+      /* Fuji authorized badge in nav (replaces old Get a Quote nav button) */
+      .nav-fuji-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.45rem 0.95rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        transition:
+          background 0.25s ease,
+          transform 0.25s ease;
+      }
+      .nav-fuji-badge:hover {
+        background: rgba(255, 255, 255, 0.09);
+        transform: translateY(-2px);
+      }
+      .nav-fuji-badge__label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        white-space: nowrap;
+      }
+      .nav-fuji-badge img {
+        height: 22px;
+        width: auto;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .nav-fuji-badge__label {
+          display: none;
+        }
+        .nav-fuji-badge {
+          padding: 0.4rem 0.6rem;
+        }
+      }
+
+      /* Floating action menu: WhatsApp + Get a Quote */
+      .fab-container {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      .fab-options {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 12px;
+        margin-bottom: 14px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition:
+          opacity 0.25s ease,
+          transform 0.25s ease;
+      }
+      .fab-container.open .fab-options {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+      .fab-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+      .fab-option-label {
+        background: #14161a;
+        color: #fff;
+        font-size: 0.76rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        padding: 0.4rem 0.75rem;
+        border-radius: 7px;
+        white-space: nowrap;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+      }
+      .fab-option-icon {
+        flex: none;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+      .fab-option-icon svg {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+      .fab-option-icon.whatsapp {
+        background: #25d366;
+      }
+      .fab-option-icon.quote {
+        background: var(--red, #c1440e);
+      }
+      .fab-main {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: var(--red, #c1440e);
+        border: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.25s ease;
+      }
+      .fab-main:hover {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.38);
+      }
+      .fab-container.open .fab-main {
+        transform: rotate(45deg);
+      }
+      .fab-main svg {
+        width: 26px;
+        height: 26px;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .fab-container {
+          right: 16px;
+          bottom: 16px;
+        }
+        .fab-main {
+          width: 52px;
+          height: 52px;
+        }
+        .fab-main svg {
+          width: 24px;
+          height: 24px;
+        }
+        .fab-option-icon {
+          width: 44px;
+          height: 44px;
+        }
+      }
+    </style>
+
+    <style>
+      /* ---- Standalone site footer ---- */
+      .site-footer {
+        background: #0d0f14;
+        color: #fff;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 4rem 0 0;
+      }
+      .site-footer .wrap {
+        max-width: var(--maxw, 1280px);
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+      .site-footer-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr 1.2fr;
+        gap: 3rem;
+        padding-bottom: 3rem;
+      }
+      .site-footer h4 {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 1.2rem;
+      }
+      .site-footer-about .brand-logo {
+        height: 42px;
+        width: auto;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .site-footer-about p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.92rem;
+        line-height: 1.65;
+        max-width: 34ch;
+        margin-bottom: 1.4rem;
+      }
+      .site-footer-menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .site-footer-menu a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        font-size: 0.92rem;
+        transition: color 0.2s ease;
+      }
+      .site-footer-menu a:hover {
+        color: #fff;
+      }
+      .site-footer-contact ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .site-footer-contact li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .site-footer-contact .ficon {
+        flex: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .site-footer-contact .ficon svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--red);
+      }
+      .site-footer-contact a,
+      .site-footer-contact span {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        padding-top: 0.35rem;
+      }
+      .site-footer-contact a:hover {
+        color: #fff;
+      }
+      .site-footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.4rem 0;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .site-footer-bottom a {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+      }
+      .site-footer-bottom a:hover {
+        color: #fff;
+      }
+      @media (max-width: 900px) {
+        .site-footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .site-footer-about {
+          grid-column: 1 / -1;
+        }
+      }
+      @media (max-width: 560px) {
+        .site-footer-grid {
+          grid-template-columns: 1fr;
+          gap: 2.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="floor-indicator">
+      <span class="num">FL <b>01</b></span>
+      <div class="rail"><div class="car"></div></div>
+      <span class="num" style="color: var(--text-faint)">05</span>
+    </div>
+    <nav class="site-nav">
+      <a href="index" class="brand">
+        <img
+          class="brand-logo header-logo-video"
+          src="images/n_logo_animation_transparent.webp"
+          alt="NESCOM Marketing"
+        />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li class="dropdown">
+          <a href="services">Services ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="home elevators">Home Elevators</a></li>
+            <li>
+              <a href="residential elevators">Residential Elevators</a>
+            </li>
+            <li><a href="passenger elevators">Passenger Elevators</a></li>
+            <li><a href="hospital elevators">Hospital Elevators</a></li>
+            <li><a href="Cargo elevators">Cargo Elevators</a></li>
+            <li><a href="panoramic elevators">Panoramic Elevators</a></li>
+            <li><a href="Escalators">Escalators & Moving Walks</a></li>
+            <li><a href="Modernization">Modernization Elevators</a></li>
+          </ul>
+        </li>
+        <li><a href="projects">Projects</a></li>
+        <li><a href="contact">Contact</a></li>
+      </ul>
+      <a
+        href="https://www.fuji-elevator-lift.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-fuji-badge"
+        aria-label="Authorized by FUJI Elevator"
+      >
+        <span class="nav-fuji-badge__label">Authorized by</span>
+        <img src="images/fuji-logo.png" alt="FUJI Elevator" />
+      </a>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-panel">
+      <span class="eyebrow">Navigate</span>
+      <a href="index">Home</a><a href="about">About</a
+      ><a href="services">Services</a><a href="projects">Projects</a
+      ><a href="contact">Contact</a>
+    </div>
+
+    <!-- ================= HERO ================= -->
+    <section class="journey-scroll-scene" id="journeyScrollScene">
+      <div class="journey-scene" id="journeyScene">
+        <video
+          id="journeyVideo"
+          muted
+          playsinline
+          preload="auto"
+          autoplay
+          poster="images/assets-journey-poster.jpg"
+          aria-label="Continuous journey through Nescom elevators, escalators and Cargo lifts"
+        >
+          <source src="videos/assets-journey-merged.mp4" type="video/mp4" />
+        </video>
+        <img
+          class="hero-poster"
+          src="images/assets-journey-poster.jpg"
+          alt="Nescom vertical transportation journey"
+        />
+        <div class="hero-scrim"></div>
+        <div class="hero-inner">
+          <div class="hero-copy" data-start="0" data-end="0.0947">
+            <div class="hero-eyebrow">
+              ELEVATOR & ESCALATOR SOLUTIONS PAKISTAN
+            </div>
+            <h1 class="hero-title">
+              WE DON'T<br />JUST INSTALL <span class="accent">LIFTS.</span> WE
+              KEEP <br />YOU <span class="accent">MOVING.</span>
+            </h1>
+            <div class="hero-tagline">
+              Safe and reliable lift solutions for every building.
+            </div>
+          </div>
+          <div class="hero-copy" data-start="0.0737" data-end="0.1842">
+            <div class="hero-eyebrow">MADE FOR EVERY JOURNEY</div>
+            <h2 class="hero-title">
+              WE MAKE<br />BETTER & SMOOTH <span class="accent">RIDE.</span>
+            </h2>
+            <div class="hero-tagline">
+              From the moment you step in to the moment you arrive, we ensure
+              every ride is safe, smooth and reliable.
+            </div>
+          </div>
+          <div class="hero-copy" data-start="0.1684" data-end="0.2658">
+            <div class="hero-eyebrow">NESCOM MARKETING - SINCE 2002</div>
+            <h2 class="hero-title">
+              YOUR LIFT<br /><span class="accent">SOLUTION IS</span> HERE.
+            </h2>
+            <div class="hero-tagline">
+              Passenger, Hospital, Cargo, Panoramic, Residential and Home
+              Elevator solutions.
+            </div>
+          </div>
+
+          <div class="escalator-copy" data-start="0.2816" data-end="0.3684">
+            <div class="eyebrow-video">FOR HIGH TRAFFIC ENVIRONMENT</div>
+            <h2>Escalators &amp;<br />Moving Walks</h2>
+            <p>
+              Smooth, continuous and reliable escalator and moving walk
+              solutions for malls, airports and other busy places.
+            </p>
+          </div>
+          <div class="escalator-copy" data-start="0.3526" data-end="0.4474">
+            <div class="eyebrow-video">Installation &amp; Modernization</div>
+            <h2>MODERNIZE YOUR<br />MOVEMENT.</h2>
+            <p>
+              Allow our installation professionals to outfit your business or
+              residential property with modern escalator and moving walk
+              equipment that complements the prestige of your location.
+            </p>
+          </div>
+          <div
+            class="escalator-copy escalator-about"
+            data-start="0.4421"
+            data-end="0.5250"
+          >
+            <div class="eyebrow-video">Engineering Excellence</div>
+            <h2>NESCOM IS ROOTED IN ENGINEERING, SAFETY AND RELIABILITY.</h2>
+            <p>
+              Nescom Marketing was founded with a vision to bring
+              international-quality standards to vertical transportation in
+              Pakistan. Today, we stand as a symbol of trust, innovation and
+              excellence in engineering elevators and escalators for the
+              country's most demanding sectors.
+            </p>
+            <a href="about" class="link-arrow"
+              >Our story
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="patient-copy" data-start="0.5432" data-end="0.6063">
+            <div class="eyebrow-video">Healthcare Solutions</div>
+            <h2>Hospital<br />Elevators</h2>
+            <p>
+              The next part of the journey focuses on patient and staff movement
+              across healthcare facilities. Trusted for safe and reliable lift
+              solutions, we ensure smooth and easy access where it matters most.
+            </p>
+          </div>
+          <div class="patient-copy" data-start="0.5937" data-end="0.6695">
+            <div class="eyebrow-video">Patient Comfort and Safe Transfer</div>
+            <h2>Designed For<br />Critical Movement.</h2>
+            <p>
+              The use of hospital bed elevators is common these days for
+              transferring patients from one floor to another. Nescom provides
+              safe, easy to use and reliable solutions for smooth everyday
+              operation.
+            </p>
+          </div>
+          <div
+            class="patient-copy patient-focus"
+            data-start="0.6653"
+            data-end="0.7330"
+          >
+            <div class="eyebrow-video">BUILT FOR HEALTHCARE</div>
+            <h2>
+              WE DESIGN AND INSTALL HOSPITAL ELEVATORS FOR PATIENT COMFORT.
+            </h2>
+            <p>
+              From hospitals and clinics to healthcare campuses, our hospital
+              elevators systems are selected and installed to support constant
+              use, smooth travel, and confidence in every ride.
+            </p>
+            <a href="hospital elevators" class="link-arrow"
+              >Hospital elevator solutions
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="Cargo-copy" data-start="0.7579" data-end="0.8368">
+            <div class="eyebrow-video">Cargo for industrial solutions</div>
+            <h2>Cargo<br />Elevators</h2>
+            <p>
+              Design to move vehicles, equipment and heavy loads between floors
+              without compromising on control or safety.
+            </p>
+          </div>
+          <div class="Cargo-copy" data-start="0.8211" data-end="0.9158">
+            <div class="eyebrow-video">Cabin Enclosure</div>
+            <h2>BUILT FOR <br />HEAVY WORK.</h2>
+            <p>
+              From moving vehicles in automotive facilities to heavy goods in
+              warehouses, our cargo elevators deliver safe and reliable
+              movement.
+            </p>
+          </div>
+          <div
+            class="Cargo-copy Cargo-focus"
+            data-start="0.9105"
+            data-end="0.999"
+            data-hold="true"
+          >
+            <div class="eyebrow-video">Service Highlight</div>
+            <h2 class="statement" id="CargoStatementText">
+              HEAVY-DUTY LIFTS BUILT FOR INDUSTRIAL, MEDICAL AND COMMERCIAL
+              LOADS.
+            </h2>
+            <p>
+              Reinforced cabins, higher load ratings and dependable operation —
+              engineered for the buildings that move more than just people.
+            </p>
+            <a href="Cargo elevators" class="link-arrow"
+              >Cargo elevator solutions
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="hero-progress">
+          <div class="hero-progress-fill" id="heroProgressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="components-section pad">
+      <div class="blob-comp"></div>
+      <div class="wrap">
+        <div class="components-head">
+          <div class="eyebrow">BEHIND EVERY INSTALLATION</div>
+          <h2>ENGINEERED AS ONE COMPLETE SYSTEM</h2>
+          <p>
+            Every Nescom elevator is built with carefully selected components
+            that work together for dependable performance, lasting reliability
+            and a smooth journey.
+          </p>
+        </div>
+        <div class="components-grid" id="componentsGrid">
+          <div class="component-card">
+            <div class="component-image">
+              <img
+                src="images/Traction Machine & Motor.jpg"
+                alt="Traction machine and motor gears"
+                loading="lazy"
+              />
+            </div>
+            <h3>Traction Machine &amp; Motor</h3>
+            <p>
+              The drive unit that raises and lowers the cabin with precise
+              torque and speed control.
+            </p>
+          </div>
+          <div class="component-card">
+            <div class="component-image">
+              <img
+                src="images/guide rails.jpg"
+                alt="Steel guide rail hardware"
+                loading="lazy"
+              />
+            </div>
+            <h3>Guide Rails</h3>
+            <p>
+              Steel rails that keep the cabin and counterweight perfectly
+              aligned along the shaft.
+            </p>
+          </div>
+          <div class="component-card">
+            <div class="component-image">
+              <img
+                src="images/cabin enclosure.jpeg"
+                alt="Elevator cabin interior"
+                loading="lazy"
+              />
+            </div>
+            <h3>Cabin Enclosure</h3>
+            <p>
+              The passenger or load compartment finished, sized and rated to the
+              project's spec.
+            </p>
+          </div>
+          <div class="component-card">
+            <div class="component-image">
+              <img
+                src="images/control panel.jpg"
+                alt="Elevator control panel"
+                loading="lazy"
+              />
+            </div>
+            <h3>Control Panel</h3>
+            <p>
+              Governs floor selection, ride speed, door timing and real-time
+              system diagnostics.
+            </p>
+          </div>
+          <div class="component-card">
+            <div class="component-image">
+              <img
+                src="images/safety speed governor.jpg"
+                alt="Safety governor mechanism"
+                loading="lazy"
+              />
+            </div>
+            <h3>Safety Governor</h3>
+            <p>
+              Continuously monitors cabin speed and triggers emergency braking
+              if limits are exceeded.
+            </p>
+          </div>
+          <div class="component-card">
+            <div class="component-image">
+              <img
+                src="images/counterweight.jpg"
+                alt="Counterweight assembly"
+                loading="lazy"
+              />
+            </div>
+            <h3>Counterweight</h3>
+            <p>
+              Balances the cabin's load against the motor, reducing energy use
+              and mechanical strain.
+            </p>
+          </div>
+          <div class="component-card">
+            <div class="component-image">
+              <img
+                src="images/door operator.jpg"
+                alt="Elevator door operator"
+                loading="lazy"
+              />
+            </div>
+            <h3>Door Operator</h3>
+            <p>
+              Controls smooth, synchronized opening and closing, with
+              obstruction sensing built in.
+            </p>
+          </div>
+          <div class="component-card">
+            <div class="component-image">
+              <img
+                src="images/Hoistway & Shaft.jpg"
+                alt="Elevator hoistway and shaft"
+                loading="lazy"
+              />
+            </div>
+            <h3>Hoistway &amp; Shaft</h3>
+            <p>
+              The vertical structure that houses and protects the entire
+              elevator system, floor to floor.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-home-section">
+      <div class="wrap">
+        <div class="cta-band fade-up">
+          <h3>
+            Let's build better
+            <span style="color: var(--red)">vertical mobility</span> together.
+          </h3>
+          <a href="#contact" class="nav-cta">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section pad" id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <div class="eyebrow" style="color: #e7b9a8">Let's get in touch</div>
+          <h2 class="contact-title" style="margin-top: 1rem">
+            Start your <span class="accent">lift</span> project.
+          </h2>
+          <p style="opacity: 0.8; max-width: 42ch; line-height: 1.7; font-size: 1rem; margin-top: 1.4rem;">Whether you need a new elevator, an upgrade, or expert advice, our team is ready to help. Share a few details below and we will get back to you soon.</p>
+          
+        </div>
+        <form
+          action="https://formsubmit.co/info@nescommarketing.com"
+          method="POST"
+        >
+          <input
+            type="hidden"
+            name="_subject"
+            value="New Website Inquiry — Nescom Marketing (Footer)"
+          />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input
+            class="form-field"
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+          />
+          <input
+            class="form-field"
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+          />
+          <input
+            class="form-field"
+            type="tel"
+            name="phone"
+            placeholder="Your Phone"
+          />
+          <input
+            class="form-field"
+            type="text"
+            name="subject"
+            placeholder="Subject"
+          />
+          <textarea
+            class="form-field"
+            name="message"
+            rows="3"
+            placeholder="Tell us about your project"
+            required
+          ></textarea>
+          <button class="submit-btn" type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="site-footer-grid">
+          <div class="site-footer-about">
+            <a href="index">
+              <img
+                src="images/nescom-logo-transparent.png"
+                alt="Nescom Marketing"
+                class="brand-logo"
+              />
+            </a>
+            <p>
+              Nescom Marketing designs, installs and modernizes elevators,
+              escalators and moving walks across Pakistan — your trusted lift
+              solution.
+            </p>
+            <div class="social-links-wrapper">
+              <a
+                href="https://www.facebook.com/nescommarketing"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn facebook"
+                aria-label="Facebook"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  width="18"
+                  height="18"
+                >
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  />
+                </svg>
+                <span>Facebook</span>
+              </a>
+              <a
+                href="https://www.instagram.com/nescommarketing/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn instagram"
+                aria-label="Instagram"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  width="18"
+                  height="18"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  />
+                </svg>
+                <span>Instagram</span>
+              </a>
+              <a
+                href="https://pk.linkedin.com/company/nescom-marketing"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn linkedin"
+                aria-label="LinkedIn"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  width="18"
+                  height="18"
+                >
+                  <path
+                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                  />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="site-footer-menu">
+            <h4>Footer Menu</h4>
+            <ul>
+              <li><a href="index">Home</a></li>
+              <li><a href="about">About</a></li>
+              <li><a href="services">Services</a></li>
+              <li><a href="projects">Projects</a></li>
+              <li><a href="contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="site-footer-contact">
+            <h4>Contact Details</h4>
+            <ul>
+              <li>
+                <span class="ficon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <span
+                  >Bhayani Shopping Centre, Shop 133M, Block-M, North Nazimabad
+                  Town, Karachi - Pakistan (74600)</span
+                >
+              </li>
+              <li>
+                <span class="ficon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"
+                    />
+                  </svg>
+                </span>
+                <a href="tel:+922134306166">+92-21-36642110-11</a>
+              </li>
+              <li>
+                <span class="ficon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z"
+                    />
+                  </svg>
+                </span>
+                <a href="tel:+923392233653">+92-339-2233653</a>
+              </li>
+              <li>
+                <span class="ficon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M4 4h16v16H4z" style="display: none" />
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3 7 9 6 9-6" />
+                  </svg>
+                </span>
+                <a href="mailto:info@nescommarketing.com"
+                  >info@nescommarketing.com</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="site-footer-bottom">
+          <span>© 2026 Nescom Marketing. All rights reserved.</span>
+          <span
+            >Design &amp; Developed by
+            <a href="https://yourstechhub.com/" target="_blank" rel="noopener"
+              >Yourstechhub</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating Action Menu: Get a Quote + WhatsApp -->
+    <div class="fab-container" id="fabMenu">
+      <div class="fab-options">
+        <a href="contact" class="fab-option" aria-label="Get a Quote">
+          <span class="fab-option-label">Get a Quote</span>
+          <span class="fab-option-icon quote">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+          </span>
+        </a>
+        <a
+          href="https://wa.me/923392233653?text=Hi%20Nescom%2C%20I%27d%20like%20to%20know%20more%20about%20your%20elevators."
+          class="fab-option"
+          target="_blank"
+          rel="noopener"
+          aria-label="Chat with Nescom on WhatsApp"
+        >
+          <span class="fab-option-label">WhatsApp</span>
+          <span class="fab-option-icon whatsapp">
+            <svg
+              viewBox="0 0 32 32"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#ffffff"
+            >
+              <path
+                d="M16.004 3C9.096 3 3.5 8.55 3.5 15.4c0 2.42.665 4.68 1.823 6.62L3 29l7.2-2.28a12.94 12.94 0 0 0 5.8 1.38h.005c6.907 0 12.5-5.55 12.5-12.4C28.5 8.55 22.91 3 16.004 3Zm0 22.66c-1.9 0-3.75-.5-5.37-1.44l-.385-.225-4.27 1.35 1.375-4.13-.25-.4a10.06 10.06 0 0 1-1.55-5.41c0-5.6 4.6-10.15 10.454-10.15 2.79 0 5.42 1.08 7.395 3.04a10.26 10.26 0 0 1 3.06 7.31c0 5.6-4.6 10.05-10.46 10.05Zm5.72-7.58c-.31-.155-1.84-.905-2.125-1.01-.285-.105-.494-.155-.703.155-.21.31-.803 1.01-.986 1.22-.182.21-.364.235-.674.08-.31-.155-1.31-.48-2.494-1.53-.922-.82-1.545-1.835-1.727-2.145-.182-.31-.02-.478.137-.633.14-.14.31-.365.465-.548.155-.183.207-.31.31-.52.104-.21.052-.39-.026-.545-.077-.155-.703-1.69-.963-2.316-.254-.61-.512-.527-.703-.537l-.6-.01c-.207 0-.545.078-.83.39-.285.31-1.09 1.065-1.09 2.598 0 1.533 1.116 3.014 1.27 3.223.156.21 2.196 3.353 5.32 4.702.744.322 1.324.514 1.777.658.746.238 1.425.204 1.962.124.599-.09 1.84-.752 2.1-1.478.259-.727.259-1.35.182-1.478-.078-.13-.286-.208-.598-.363Z"
+              />
+            </svg>
+          </span>
+        </a>
+      </div>
+      <button
+        type="button"
+        class="fab-main"
+        aria-label="Open quick actions"
+        aria-expanded="false"
+        onclick="
+          var m = document.getElementById('fabMenu');
+          var open = m.classList.toggle('open');
+          this.setAttribute('aria-expanded', open);
+        "
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#fff"
+          stroke-width="2.4"
+          stroke-linecap="round"
+        >
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      </button>
+    </div>
+  </body>
+</html>
+
+<script>
+  (function () {
+    "use strict";
+    var doc = document,
+      win = window;
+    var captureMode = new URLSearchParams(location.search).has("capture");
+    var clamp = function (v, a, b) {
+      return Math.max(a, Math.min(b, v));
+    };
+    var lerp = function (a, b, t) {
+      return a + (b - a) * t;
+    };
+    /* ---- shared nav (matched to about.html) ---- */
+    var nav = doc.querySelector(".site-nav");
+    var contactSection = doc.getElementById("contact");
+    function updateNav() {
+      if (nav) nav.classList.toggle("is-scrolled", win.scrollY > 60);
+      if (nav && contactSection) {
+        var navHeight = nav.offsetHeight;
+        var contactTop = contactSection.getBoundingClientRect().top;
+        nav.classList.toggle("nav-hidden", contactTop <= navHeight);
+      }
+    }
+    win.addEventListener("scroll", updateNav, { passive: true });
+    updateNav();
+
+    var toggle = doc.querySelector(".nav-toggle"),
+      mobilePanel = doc.querySelector(".mobile-panel");
+    if (toggle && mobilePanel) {
+      toggle.addEventListener("click", function () {
+        var open = mobilePanel.classList.toggle("open");
+        toggle.classList.toggle("is-open", open);
+        doc.body.style.overflow = open ? "hidden" : "";
+      });
+      mobilePanel.querySelectorAll("a").forEach(function (a) {
+        a.addEventListener("click", function () {
+          mobilePanel.classList.remove("open");
+          toggle.classList.remove("is-open");
+          doc.body.style.overflow = "";
+        });
+      });
+    }
+
+    var floorCar = doc.querySelector(".floor-indicator .car"),
+      floorNum = doc.querySelector(".floor-indicator .num b"),
+      floorRail = doc.querySelector(".floor-indicator .rail");
+    function updateFloor() {
+      if (!floorCar || !floorRail) return;
+      var docEl = doc.documentElement;
+      var scrollable = docEl.scrollHeight - docEl.clientHeight || 1;
+      var progress = clamp(win.scrollY / scrollable, 0, 1);
+      floorCar.style.top = progress * (floorRail.offsetHeight - 9) + "px";
+      if (floorNum)
+        floorNum.textContent = String(
+          Math.min(5, Math.max(1, Math.round(progress * 4) + 1)),
+        ).padStart(2, "0");
+    }
+    win.addEventListener("scroll", updateFloor, { passive: true });
+    win.addEventListener("resize", updateFloor);
+    updateFloor();
+
+    var journeyScene = doc.getElementById("journeyScrollScene");
+    var journeySticky = doc.getElementById("journeyScene");
+    var journeyVideo = doc.getElementById("journeyVideo");
+    var fill = doc.getElementById("heroProgressFill");
+    var floor = doc.getElementById("heroFloor");
+    var journeyLabel = doc.getElementById("journeyLabel");
+    var copies = [].slice.call(
+      doc.querySelectorAll(
+        ".hero-copy, .escalator-copy, .patient-copy, .Cargo-copy",
+      ),
+    );
+    var duration = 38,
+      target = 0,
+      smooth = 0,
+      ready = false,
+      introPlaying = true,
+      videoSeeking = false,
+      seekWaitStart = 0,
+      lastTime = performance.now();
+    var LABEL_STOPS = [
+      { at: 0, label: "Elevator Doors" },
+      { at: 0.2632, label: "Escalators & Moving Walks" },
+      { at: 0.5263, label: "Hospital Elevators" },
+      { at: 0.7368, label: "Cargo Elevators" },
+    ];
+    /* Safety net only: if the video totally fails to become playable within 4s
+     (broken file, unsupported codec, blocked autoplay with no fallback), mark
+     the journey as video-failed via CSS class so a pure-CSS rule can reveal
+     the opening line. This never touches the normal scroll-scrub math below. */
+    var heroFallbackTimer = setTimeout(function () {
+      if (!ready) {
+        doc.documentElement.classList.add("video-failed");
+      }
+    }, 4000);
+    function unlockVideo() {
+      if (!journeyVideo) return;
+      var p = journeyVideo.play();
+      if (p && p.then)
+        p.then(function () {
+          journeyVideo.pause();
+        }).catch(function () {});
+      win.removeEventListener("pointerdown", unlockVideo);
+      win.removeEventListener("touchstart", unlockVideo);
+    }
+    win.addEventListener("pointerdown", unlockVideo, { passive: true });
+    win.addEventListener("touchstart", unlockVideo, { passive: true });
+    function videoReady() {
+      duration =
+        isFinite(journeyVideo.duration) && journeyVideo.duration > 0
+          ? journeyVideo.duration
+          : 38;
+      ready = true;
+      if (journeySticky) journeySticky.classList.add("video-ready");
+      clearTimeout(heroFallbackTimer);
+      try {
+        journeyVideo.currentTime = Math.max(0.01, smooth * duration);
+      } catch (e) {}
+    }
+    if (journeyVideo) {
+      journeyVideo.addEventListener("loadedmetadata", videoReady, {
+        once: true,
+      });
+      journeyVideo.addEventListener(
+        "canplay",
+        function () {
+          if (journeySticky) journeySticky.classList.add("video-ready");
+          if (introPlaying) {
+            var p = journeyVideo.play();
+            if (p && p.catch) p.catch(function () {});
+            setTimeout(function () {
+              if (introPlaying) {
+                journeyVideo.pause();
+                smooth = Math.min(0.05, journeyVideo.currentTime / duration);
+                introPlaying = false;
+              }
+            }, 2400);
+          }
+        },
+        { once: true },
+      );
+      journeyVideo.addEventListener("error", function () {
+        if (journeySticky) journeySticky.classList.remove("video-ready");
+      });
+      /* Track real seek state via the native events instead of polling
+         .seeking inside the rAF loop. Issuing a new currentTime write while
+         a previous seek is still resolving cancels/restarts the decode
+         pipeline in most browsers, which is what produced the repeated
+         stop-start stutter during scroll. Waiting for "seeked" before the
+         next write lets every seek finish cleanly. */
+      journeyVideo.addEventListener("seeking", function () {
+        videoSeeking = true;
+        seekWaitStart = performance.now();
+      });
+      journeyVideo.addEventListener("seeked", function () {
+        videoSeeking = false;
+        seekWaitStart = 0;
+      });
+      journeyVideo.load();
+      if (journeyVideo.readyState >= 1) videoReady();
+    }
+    function journeyProgress() {
+      if (!journeyScene) return 0;
+      var r = journeyScene.getBoundingClientRect();
+      return clamp(
+        -r.top / Math.max(1, journeyScene.offsetHeight - win.innerHeight),
+        0,
+        1,
+      );
+    }
+    function copyOpacity(p, start, end) {
+      var edge = Math.min(0.09, (end - start) * 0.28);
+      return Math.min(
+        clamp((p - start) / edge, 0, 1),
+        clamp((end - p) / edge, 0, 1),
+      );
+    }
+    var currentLabelIdx = 0;
+    function frame(now) {
+      target = journeyProgress();
+      if (target > 0.004 && introPlaying) {
+        introPlaying = false;
+        if (journeyVideo) journeyVideo.pause();
+      }
+      var dt = Math.min(40, now - lastTime);
+      lastTime = now;
+      if (introPlaying && ready && journeyVideo) {
+        smooth = clamp(journeyVideo.currentTime / duration, 0, 0.05);
+      } else {
+        smooth = lerp(smooth, target, 1 - Math.pow(0.89, dt / 16.67));
+      }
+      if (ready && journeyVideo && journeyVideo.readyState >= 2) {
+        var desired = Math.round(smooth * duration * 24) / 24;
+        desired = Math.min(
+          Math.max(0.001, desired),
+          Math.max(0.001, duration - 0.001),
+        );
+        var needsUpdate = Math.abs(journeyVideo.currentTime - desired) > 0.03;
+        // Only ever start a new seek once the previous one has actually
+        // resolved (native "seeked" event) — never overlap seeks. A stuck
+        // seek (decode stall) still gets released after ~200ms so sync
+        // can't freeze permanently, but this no longer fires on every
+        // normal in-flight seek the way the old fixed 150ms timer did.
+        var seekStuck =
+          videoSeeking && seekWaitStart && now - seekWaitStart > 200;
+        if (needsUpdate && (!videoSeeking || seekStuck)) {
+          try {
+            journeyVideo.currentTime = desired;
+          } catch (e) {}
+        }
+      }
+      if (fill) fill.style.width = (smooth * 100).toFixed(2) + "%";
+      if (floor)
+        floor.textContent = String(
+          Math.min(38, Math.round(smooth * 38)),
+        ).padStart(2, "0");
+      if (journeyLabel) {
+        var idx = 0;
+        for (var i = 0; i < LABEL_STOPS.length; i++) {
+          if (smooth >= LABEL_STOPS[i].at) idx = i;
+        }
+        if (idx !== currentLabelIdx) {
+          currentLabelIdx = idx;
+          journeyLabel.style.opacity = "0";
+          setTimeout(
+            function (li) {
+              journeyLabel.textContent = LABEL_STOPS[li].label;
+              journeyLabel.style.opacity = ".82";
+            },
+            180,
+            idx,
+          );
+        }
+      }
+      copies.forEach(function (el) {
+        var start = parseFloat(el.dataset.start || 0),
+          end = parseFloat(el.dataset.end || 1),
+          hold = el.dataset.hold === "true";
+        var o = hold
+          ? clamp((smooth - start) / 0.105, 0, 1)
+          : copyOpacity(smooth, start, end);
+        el.style.opacity = o.toFixed(3);
+        el.style.filter = "blur(" + ((1 - o) * 7).toFixed(2) + "px)";
+        var isFocusCard =
+          el.classList.contains("escalator-about") ||
+          el.classList.contains("patient-focus") ||
+          el.classList.contains("Cargo-focus");
+        if (!isFocusCard)
+          el.style.transform =
+            "translateY(calc(-50% + " + ((1 - o) * 26).toFixed(1) + "px))";
+        else
+          el.style.transform =
+            "translateY(" + ((1 - o) * 24).toFixed(1) + "px)";
+        el.classList.toggle("is-active", o > 0.02);
+      });
+      if (!captureMode || now < 3200) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    var revealEls = [].slice.call(doc.querySelectorAll(".fade-up"));
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.style.opacity = "1";
+            e.target.style.transform = "translateY(0)";
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    /* Component spec cards: rise up one after another, elevator-style, the
+     first time the grid scrolls into view. */
+    var compGrid = doc.getElementById("componentsGrid");
+    if (compGrid) {
+      var compCards = [].slice.call(
+        compGrid.querySelectorAll(".component-card"),
+      );
+      var compIo = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            compCards.forEach(function (card, i) {
+              setTimeout(function () {
+                card.classList.add("is-up");
+              }, i * 90);
+            });
+            compIo.disconnect();
+          });
+        },
+        { threshold: 0.18, rootMargin: "0px 0px -6% 0px" },
+      );
+      compIo.observe(compGrid);
+    }
+    revealEls.forEach(function (el) {
+      el.style.transition =
+        "opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)";
+      io.observe(el);
+    });
+
+    var statement = doc.getElementById("statementText");
+    if (statement) {
+      var words = statement.textContent.trim().split(/\s+/);
+      statement.innerHTML = words
+        .map(function (w) {
+          return '<span class="w">' + w + " </span>";
+        })
+        .join("");
+    }
+    var patientStatement = doc.getElementById("patientStatementText");
+    if (patientStatement) {
+      var pWords = patientStatement.textContent.trim().split(/\s+/);
+      patientStatement.innerHTML = pWords
+        .map(function (w) {
+          return '<span class="w">' + w + " </span>";
+        })
+        .join("");
+    }
+    var CargoStatement = doc.getElementById("CargoStatementText");
+    if (CargoStatement) {
+      var fWords = CargoStatement.textContent.trim().split(/\s+/);
+      CargoStatement.innerHTML = fWords
+        .map(function (w) {
+          return '<span class="w">' + w + " </span>";
+        })
+        .join("");
+    }
+    function updateScrollEffects() {
+      if (statement) {
+        var sr = statement.getBoundingClientRect(),
+          sp = clamp(
+            (win.innerHeight * 0.88 - sr.top) / (win.innerHeight * 0.52),
+            0,
+            1,
+          ),
+          ws = statement.querySelectorAll(".w");
+        ws.forEach(function (w, i) {
+          w.style.opacity = clamp(sp * ws.length - i * 0.85, 0, 1);
+        });
+      }
+      if (patientStatement) {
+        var prr = patientStatement.getBoundingClientRect(),
+          ppp = clamp(
+            (win.innerHeight * 0.88 - prr.top) / (win.innerHeight * 0.52),
+            0,
+            1,
+          ),
+          pws = patientStatement.querySelectorAll(".w");
+        pws.forEach(function (w, i) {
+          w.style.opacity = clamp(ppp * pws.length - i * 0.85, 0, 1);
+        });
+      }
+      if (CargoStatement) {
+        var frr = CargoStatement.getBoundingClientRect(),
+          fpp = clamp(
+            (win.innerHeight * 0.88 - frr.top) / (win.innerHeight * 0.52),
+            0,
+            1,
+          ),
+          fws = CargoStatement.querySelectorAll(".w");
+        fws.forEach(function (w, i) {
+          w.style.opacity = clamp(fpp * fws.length - i * 0.85, 0, 1);
+        });
+      }
+    }
+    win.addEventListener("scroll", updateScrollEffects, { passive: true });
+    win.addEventListener("resize", updateScrollEffects, { passive: true });
+    updateScrollEffects();
+
+    var q = new URLSearchParams(location.search);
+    if (q.has("preview")) {
+      var pv = clamp(parseFloat(q.get("preview")) || 0, 0, 1);
+      win.addEventListener("load", function () {
+        setTimeout(function () {
+          win.scrollTo(
+            0,
+            pv * Math.max(1, scene.offsetHeight - win.innerHeight),
+          );
+        }, 450);
+      });
+    }
+    if (q.has("escalatorPreview") && escScene) {
+      var ep = clamp(parseFloat(q.get("escalatorPreview")) || 0, 0, 1);
+      win.addEventListener("load", function () {
+        setTimeout(function () {
+          var top = escScene.offsetTop;
+          win.scrollTo(
+            0,
+            top + ep * Math.max(1, escScene.offsetHeight - win.innerHeight),
+          );
+        }, 650);
+      });
+    }
+    if (q.has("patientPreview") && patientSceneWrap) {
+      var pp = clamp(parseFloat(q.get("patientPreview")) || 0, 0, 1);
+      win.addEventListener("load", function () {
+        setTimeout(function () {
+          var top = patientSceneWrap.offsetTop;
+          win.scrollTo(
+            0,
+            top +
+              pp * Math.max(1, patientSceneWrap.offsetHeight - win.innerHeight),
+          );
+        }, 850);
+      });
+    }
+  })();
+</script>

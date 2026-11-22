@@ -1,0 +1,1854 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panoramic Elevators — Nescom Marketing</title>
+    <link rel="icon" type="image/png" href="images/nescom logo.jpg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Integrated Color System & Variables */
+      :root {
+        --bg: #1b1e24;
+        --bg-alt: #22262e;
+        --surface: #22262e;
+        --surface-2: #2a2f38;
+        --border: rgba(255, 255, 255, 0.12);
+        --border-soft: rgba(255, 255, 255, 0.08);
+
+        --red: #d81f2b;
+        --red-dark: #99131c;
+        --red-glow: rgba(216, 31, 43, 0.22);
+
+        --text: #f2f4f8;
+        --text-dim: #c3c8d1;
+        --text-faint: #838c9c;
+
+        --radius: 2px;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --maxw: 1240px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* ---------- SITE NAV HEADER ---------- */
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
+        background: color-mix(in srgb, var(--ink) 30%, transparent);
+        backdrop-filter: blur(18px) saturate(160%);
+        border-bottom: 1px solid var(--border);
+        transition:
+          background 0.35s var(--ease),
+          border-color 0.35s var(--ease),
+          padding 0.35s var(--ease),
+          transform 0.35s var(--ease);
+      }
+      .site-nav.nav-hidden {
+        transform: translateY(-100%);
+      }
+
+      .site-nav.is-scrolled {
+        background: color-mix(in srgb, var(--ink) 55%, transparent);
+        backdrop-filter: blur(22px) saturate(160%);
+        padding-top: 0.7rem;
+        padding-bottom: 0.7rem;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        z-index: 2;
+      }
+
+      .pad {
+        padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+      }
+      .brand-logo {
+        height: 54px;
+        width: auto;
+        display: block;
+      }
+      footer .brand-logo {
+        height: 64px;
+      }
+      .header-logo-video {
+        width: 150px;
+        height: 54px;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+        background: transparent;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2.2rem;
+      }
+      .nav-links .dropdown {
+        position: relative;
+      }
+
+      .nav-links .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        min-width: 230px;
+        padding: 0.5rem 0;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s var(--ease);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        z-index: 300;
+      }
+
+      .nav-links .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .nav-links .dropdown-menu li {
+        width: 100%;
+      }
+
+      .nav-links .dropdown-menu a {
+        display: block;
+        padding: 0.65rem 1.2rem;
+        font-size: 0.82rem;
+        color: var(--text-dim);
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      .nav-links .dropdown-menu a::after {
+        display: none;
+      }
+
+      .nav-links .dropdown-menu a:hover {
+        background: var(--bg-alt);
+        color: var(--red);
+      }
+
+      .nav-links a {
+        font-size: 0.86rem;
+        font-weight: 500;
+        color: var(--text-dim);
+        position: relative;
+        padding: 0.3rem 0;
+        transition: color 0.25s;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        height: 1px;
+        width: 0;
+        background: var(--red);
+        transition: width 0.3s var(--ease);
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--text);
+      }
+
+      .nav-links a.active::after,
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--red);
+        color: #fff;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 0.7rem 1.3rem;
+        border: 1px solid var(--red);
+        transition:
+          background 0.25s,
+          color 0.25s,
+          transform 0.25s;
+      }
+
+      .nav-cta:hover {
+        background: transparent;
+        color: var(--text);
+      }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: 0;
+        z-index: 210;
+        padding: 0.4rem;
+        cursor: pointer;
+      }
+
+      .nav-toggle span {
+        width: 24px;
+        height: 2px;
+        background: var(--text);
+        transition:
+          transform 0.3s var(--ease),
+          opacity 0.3s;
+      }
+
+      .nav-toggle.is-open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .nav-toggle.is-open span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-toggle.is-open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .mobile-panel {
+        position: fixed;
+        inset: 0;
+        z-index: 150;
+        background: var(--bg-alt);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem clamp(1.5rem, 8vw, 4rem);
+        transform: translateX(100%);
+        transition: transform 0.5s var(--ease);
+      }
+
+      .mobile-panel.open {
+        transform: translateX(0);
+      }
+
+      .mobile-panel a {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.9rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .mobile-panel .eyebrow {
+        margin-bottom: 1rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--red);
+      }
+
+      /* ---------- PAGE CONTENT ---------- */
+      main.container {
+        padding-top: 7.5rem;
+        padding-bottom: 3rem;
+      }
+
+      /* Title Section */
+      .page-header {
+        animation: fadeIn 0.6s ease-out;
+        margin-bottom: 2rem;
+      }
+
+      .page-header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+
+      .page-header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+      }
+
+      /* Image & Overview Grid Layout */
+      .hero-overview-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1.8rem;
+        align-items: stretch;
+      }
+
+      .hero-overview-grid .hero-image-card,
+      .hero-overview-grid .card {
+        margin-bottom: 0;
+        height: 100%;
+      }
+
+      /* Product Image Showcase */
+      .hero-image-card {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--surface);
+        animation: slideUp 0.5s ease-out;
+      }
+
+      .hero-image-card img {
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Content Cards */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1.8rem;
+        margin-bottom: 1.8rem;
+        animation: slideUp 0.5s ease-out;
+      }
+
+      .card h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: var(--text);
+        border-left: 3px solid var(--primary);
+        padding-left: 0.75rem;
+      }
+
+      .card p {
+        color: var(--text-dim);
+      }
+
+      /* Feature Grid */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.2rem;
+        margin-top: 1.2rem;
+      }
+
+      .grid-item {
+        background: rgba(10, 15, 30, 0.03);
+        border: 1px solid var(--border);
+        padding: 1.2rem;
+        border-radius: 4px;
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease;
+      }
+
+      .grid-item:hover {
+        transform: translateY(-3px);
+        border-color: var(--primary);
+      }
+
+      .grid-item h3 {
+        font-size: 1rem;
+        color: var(--primary);
+        margin-bottom: 0.4rem;
+      }
+
+      .grid-item p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+
+      /* Simple CTA */
+      .cta-card {
+        text-align: center;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 2.2rem 1.5rem;
+        border-radius: 6px;
+        margin-top: 2.5rem;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        margin-top: 1.2rem;
+        background: var(--primary);
+        color: #fff;
+        padding: 0.75rem 1.8rem;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        transition:
+          background 0.3s ease,
+          transform 0.2s ease;
+      }
+
+      .cta-btn:hover {
+        background: var(--red-dark);
+        transform: translateY(-2px);
+      }
+
+      /* ---------- FOOTER ---------- */
+      .contact-section {
+        background: #0a0c11;
+        color: #fff;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+      }
+      @media (max-width: 900px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .contact-title {
+        font-size: clamp(2.1rem, 5vw, 3.6rem);
+        text-transform: uppercase;
+        line-height: 1;
+      }
+      .contact-title .accent {
+        color: var(--red);
+      }
+      .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 2.2rem 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .contact-list a {
+        font-size: 1.05rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        padding-bottom: 0.5rem;
+        display: inline-block;
+      }
+      .form-field {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        padding: 0.85rem 0.2rem;
+        font-family: Inter, sans-serif;
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+      }
+      .form-field::placeholder {
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .form-field:focus {
+        outline: none;
+        border-color: var(--red);
+      }
+      .submit-btn {
+        margin-top: 0.6rem;
+        background: var(--red);
+        color: #fff;
+        border: none;
+        padding: 0.95rem 2.1rem;
+        font-weight: 600;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.25s ease;
+      }
+      .submit-btn:hover {
+        background: var(--red-dark);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        margin-top: 4.5rem;
+        padding-top: 1.6rem;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .footer-bottom a {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .footer-quicklinks {
+        font-size: 1rem !important;
+        font-weight: 500;
+      }
+      .footer-quicklinks a {
+        color: rgba(255, 255, 255, 0.85) !important;
+      }
+      .footer-quicklinks a:hover {
+        color: var(--red) !important;
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      /* Light Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Rules */
+      @media (max-width: 900px) {
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+        .nav-toggle {
+          display: flex;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-overview-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-image-card img {
+          height: 300px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-image-card img {
+          height: 220px;
+        }
+      }
+
+      /* ================= RELATED SERVICES SIDEBAR + 3D ELEMENTS ================= */
+      main.container {
+        max-width: 1180px;
+      }
+
+      .page-layout {
+        display: grid;
+        grid-template-columns: 248px 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
+
+      .services-sidebar {
+        position: sticky;
+        top: 6.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.3rem 1.1rem;
+        perspective: 800px;
+      }
+
+      .services-sidebar .sidebar-eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: 0.9rem;
+        display: block;
+      }
+
+      .sidebar-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .sidebar-list a {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.45rem 0.5rem;
+        border-radius: 6px;
+        font-size: 0.83rem;
+        font-weight: 500;
+        color: var(--text-dim);
+        border-left: 3px solid transparent;
+        transition:
+          transform 0.35s var(--ease),
+          background 0.25s,
+          border-color 0.25s,
+          color 0.25s;
+        transform-style: preserve-3d;
+      }
+
+      .sidebar-list a img {
+        width: 38px;
+        height: 38px;
+        border-radius: 6px;
+        object-fit: cover;
+        flex: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        transition: transform 0.35s var(--ease);
+      }
+
+      .sidebar-list a:hover,
+      .sidebar-list a.active {
+        background: rgba(216, 31, 43, 0.06);
+        border-left-color: var(--red);
+        color: var(--text);
+        transform: translateX(4px) rotateY(-4deg);
+      }
+
+      .sidebar-list a:hover img,
+      .sidebar-list a.active img {
+        transform: rotateY(14deg) scale(1.08);
+      }
+
+      .sidebar-viewall {
+        display: block;
+        text-align: center;
+        margin-top: 1.1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: var(--red);
+      }
+
+      .sidebar-viewall:hover {
+        color: var(--red-dark);
+      }
+
+      /* Thematic animated elevator car riding inside a shaft */
+      .mini-elevator {
+        margin-top: 1.3rem;
+        padding-top: 1.2rem;
+        border-top: 1px dashed var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mini-elevator .shaft {
+        position: relative;
+        width: 34px;
+        height: 92px;
+        background: linear-gradient(180deg, var(--bg-alt), var(--surface));
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        perspective: 300px;
+        overflow: hidden;
+      }
+
+      .mini-elevator .car {
+        position: absolute;
+        left: 3px;
+        right: 3px;
+        height: 22px;
+        background: var(--red);
+        border-radius: 3px;
+        box-shadow:
+          0 3px 6px rgba(216, 31, 43, 0.4),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+        animation: elevatorRide 4.5s var(--ease) infinite;
+        transform-style: preserve-3d;
+      }
+
+      @keyframes elevatorRide {
+        0%,
+        100% {
+          top: 4px;
+          transform: rotateX(4deg);
+        }
+        45%,
+        55% {
+          top: 66px;
+          transform: rotateX(-4deg);
+        }
+      }
+
+      /* Enhanced 3D tilt on hero image + feature cards */
+      .hero-image-card,
+      .grid-item {
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      .hero-image-card:hover {
+        transform: perspective(900px) rotateX(1.5deg) rotateY(-1.5deg)
+          translateY(-3px);
+      }
+
+      .grid-item:hover {
+        transform: perspective(700px) rotateX(2deg) rotateY(-2deg)
+          translateY(-4px);
+        border-color: var(--primary);
+      }
+
+      @media (max-width: 900px) {
+        .page-layout {
+          grid-template-columns: 1fr;
+        }
+        .services-sidebar {
+          position: static;
+          order: 2;
+        }
+      }
+
+      /* ================= SOCIAL LINKS (base, all screen sizes) ================= */
+      .social-links-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 1.2rem;
+      }
+      .social-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.45rem 0.85rem;
+        background-color: #d81f2b;
+        color: #ffffff;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 500;
+        transition: all 0.3s var(--ease);
+        transform-style: preserve-3d;
+      }
+      .footer-grid .social-links-wrapper a.social-btn,
+      .social-links-wrapper a.social-btn,
+      .social-links-wrapper a.social-btn span {
+        color: #ffffff !important;
+      }
+      .social-btn svg {
+        width: 15px !important;
+        height: 15px !important;
+        fill: #ffffff !important;
+        flex-shrink: 0;
+        transition: transform 0.3s var(--ease);
+      }
+      .social-btn:hover,
+      .social-btn:focus-visible {
+        background-color: #ff3b3b;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(216, 31, 43, 0.35);
+      }
+      .social-btn:hover svg,
+      .social-btn:focus-visible svg {
+        fill: #ffffff !important;
+        transform: scale(1.15);
+      }
+      .social-btn:active {
+        transform: translateY(0);
+      }
+
+      /* ================= 3D TEXT / HEADING TOUCHES ================= */
+      h2,
+      .section-head h2 {
+        transition: transform 0.45s var(--ease);
+        transform-style: preserve-3d;
+      }
+      h2:hover,
+      .section-head h2:hover {
+        transform: perspective(700px) rotateX(3deg) translateZ(4px);
+      }
+      @keyframes heroTextFloat {
+        0%,
+        100% {
+          transform: translateZ(0) rotateX(0deg);
+        }
+        50% {
+          transform: translateZ(6px) rotateX(0.6deg);
+        }
+      }
+      .hero h1,
+      .page-head h1,
+      .page-header h1 {
+        animation: heroTextFloat 7s ease-in-out infinite;
+        transform-style: preserve-3d;
+      }
+
+      .nav-links .dropdown-menu a.active {
+        background: var(--bg-alt);
+        color: var(--red);
+      }
+      /* ================= GLOBAL PREMIUM SYSTEM (cursor, blueprint grid) ================= */
+      html.has-custom-cursor,
+      html.has-custom-cursor * {
+        cursor: none !important;
+      }
+      @media (max-width: 900px), (hover: none) {
+        html.has-custom-cursor,
+        html.has-custom-cursor * {
+          cursor: auto !important;
+        }
+      }
+      #custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        margin: -4px 0 0 -4px;
+        border-radius: 50%;
+        background: var(--red);
+        z-index: 10000;
+        pointer-events: none;
+        transition:
+          transform 0.12s ease,
+          opacity 0.2s ease;
+        will-change: transform;
+      }
+      #custom-cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 34px;
+        height: 34px;
+        margin: -17px 0 0 -17px;
+        border-radius: 50%;
+        border: 1px solid rgba(216, 31, 43, 0.4);
+        z-index: 9999;
+        pointer-events: none;
+        transition:
+          transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+          width 0.25s ease,
+          height 0.25s ease,
+          margin 0.25s ease,
+          border-color 0.25s ease,
+          background 0.25s ease;
+        will-change: transform;
+      }
+      #custom-cursor-ring.is-active {
+        width: 54px;
+        height: 54px;
+        margin: -27px 0 0 -27px;
+        background: rgba(216, 31, 43, 0.08);
+        border-color: rgba(216, 31, 43, 0.7);
+      }
+      @media (max-width: 900px), (hover: none) {
+        #custom-cursor,
+        #custom-cursor-ring {
+          display: none;
+        }
+      }
+
+      .blueprint-grid {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0;
+        background-image:
+          linear-gradient(rgba(90, 170, 190, 0.35) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(90, 170, 190, 0.35) 1px, transparent 1px);
+        background-size: 42px 42px;
+        -webkit-mask-image: radial-gradient(
+          ellipse 60% 80% at 50% 0%,
+          #000 0%,
+          transparent 75%
+        );
+        mask-image: radial-gradient(
+          ellipse 60% 80% at 50% 0%,
+          #000 0%,
+          transparent 75%
+        );
+        transition: opacity 1.2s ease;
+      }
+      .blueprint-grid.is-visible {
+        opacity: 1;
+      }
+
+      /* active-nav-fix */
+
+      .wrap {
+        max-width: var(--maxw, 1240px);
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+
+      /* ---------- UNIVERSAL INTERACTIVE CLICK FIX ---------- */
+      /* Decorative animation layers must never sit above interactive controls. */
+      .blueprint-grid,
+      .grain,
+      .hero::before,
+      .hero::after,
+      .page-head::before,
+      .page-head::after,
+      .cta-band::before,
+      .cta-band::after,
+      [aria-hidden="true"] {
+        pointer-events: none !important;
+      }
+      a,
+      button,
+      input,
+      textarea,
+      select {
+        pointer-events: auto !important;
+      }
+      .btn,
+      .cta-btn,
+      .nav-cta,
+      .hero-actions a,
+      .cta-band a,
+      .page-head a {
+        position: relative !important;
+        z-index: 20 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+      }
+
+      /* ---------- CTA / LINK CLICK FIX ---------- */
+      .nav-cta {
+        position: relative !important;
+        z-index: 210 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+      }
+      .cta-band::after {
+        pointer-events: none !important;
+      }
+      .cta-band .btn {
+        position: relative !important;
+        z-index: 2 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+      }
+
+    </style>
+  
+    <style>
+      /* Fuji authorized badge in nav (replaces old Get a Quote nav button) */
+      .nav-fuji-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.45rem 0.95rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        transition: background 0.25s ease, transform 0.25s ease;
+      }
+      .nav-fuji-badge:hover {
+        background: rgba(255, 255, 255, 0.09);
+        transform: translateY(-2px);
+      }
+      .nav-fuji-badge__label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        white-space: nowrap;
+      }
+      .nav-fuji-badge img {
+        height: 22px;
+        width: auto;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .nav-fuji-badge__label { display: none; }
+        .nav-fuji-badge { padding: 0.4rem 0.6rem; }
+      }
+
+      /* Floating action menu: WhatsApp + Get a Quote */
+      .fab-container {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      .fab-options {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 12px;
+        margin-bottom: 14px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+      .fab-container.open .fab-options {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+      .fab-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+      .fab-option-label {
+        background: #14161a;
+        color: #fff;
+        font-size: 0.76rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        padding: 0.4rem 0.75rem;
+        border-radius: 7px;
+        white-space: nowrap;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+      }
+      .fab-option-icon {
+        flex: none;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      }
+      .fab-option-icon svg { width: 24px; height: 24px; display: block; }
+      .fab-option-icon.whatsapp { background: #25d366; }
+      .fab-option-icon.quote { background: var(--red, #c1440e); }
+      .fab-main {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: var(--red, #c1440e);
+        border: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.25s ease;
+      }
+      .fab-main:hover { box-shadow: 0 12px 30px rgba(0, 0, 0, 0.38); }
+      .fab-container.open .fab-main { transform: rotate(45deg); }
+      .fab-main svg { width: 26px; height: 26px; display: block; }
+      @media (max-width: 600px) {
+        .fab-container { right: 16px; bottom: 16px; }
+        .fab-main { width: 52px; height: 52px; }
+        .fab-main svg { width: 24px; height: 24px; }
+        .fab-option-icon { width: 44px; height: 44px; }
+      }
+    </style>
+  
+    <style>
+      /* ---- Standalone site footer ---- */
+      .site-footer {
+        background: #0d0f14;
+        color: #fff;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 4rem 0 0;
+      }
+      .site-footer .wrap {
+        max-width: var(--maxw, 1280px);
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+      .site-footer-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr 1.2fr;
+        gap: 3rem;
+        padding-bottom: 3rem;
+      }
+      .site-footer h4 {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 1.2rem;
+      }
+      .site-footer-about .brand-logo {
+        height: 42px;
+        width: auto;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .site-footer-about p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.92rem;
+        line-height: 1.65;
+        max-width: 34ch;
+        margin-bottom: 1.4rem;
+      }
+      .site-footer-menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .site-footer-menu a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        font-size: 0.92rem;
+        transition: color 0.2s ease;
+      }
+      .site-footer-menu a:hover { color: #fff; }
+      .site-footer-contact ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .site-footer-contact li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .site-footer-contact .ficon {
+        flex: none;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .site-footer-contact .ficon svg {
+        width: 16px;
+        height: 16px;
+        stroke: var(--red);
+      }
+      .site-footer-contact a,
+      .site-footer-contact span {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        padding-top: 0.35rem;
+      }
+      .site-footer-contact a:hover { color: #fff; }
+      .site-footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.4rem 0;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .site-footer-bottom a {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+      }
+      .site-footer-bottom a:hover { color: #fff; }
+      @media (max-width: 900px) {
+        .site-footer-grid { grid-template-columns: 1fr 1fr; }
+        .site-footer-about { grid-column: 1 / -1; }
+      }
+      @media (max-width: 560px) {
+        .site-footer-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Site Navigation Header -->
+    <nav class="site-nav" id="site-nav">
+      <a href="index" class="brand">
+        <img
+          class="brand-logo header-logo-video"
+          src="images/n_logo_animation_transparent.webp"
+          alt="NESCOM Marketing"
+        />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li class="dropdown">
+          <a href="services">Services ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="home elevators">Home Elevators</a></li>
+            <li>
+              <a href="residential elevators">Residential Elevators</a>
+            </li>
+            <li><a href="passenger elevators">Passenger Elevators</a></li>
+            <li><a href="hospital elevators">Hospital Elevators</a></li>
+            <li><a href="Cargo elevators">Cargo Elevators</a></li>
+            <li><a href="panoramic elevators">Panoramic Elevators</a></li>
+            <li><a href="Escalators">Escalators & Moving Walks</a></li>
+            <li><a href="Modernization">Modernization Elevators</a></li>
+          </ul>
+        </li>
+        <li><a href="projects">Projects</a></li>
+        <li><a href="contact">Contact</a></li>
+      </ul>
+      <a
+        href="https://www.fuji-elevator-lift.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-fuji-badge"
+        aria-label="Authorized by FUJI Elevator"
+      >
+        <span class="nav-fuji-badge__label">Authorized by</span>
+        <img src="images/fuji-logo.png" alt="FUJI Elevator" />
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-panel" id="mobile-panel">
+      <span class="eyebrow">Navigate</span>
+      <a href="index">Home</a>
+      <a href="about">About</a>
+      <a href="services">Services</a>
+      <a href="projects">Projects</a>
+      <a href="contact">Contact</a>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="container">
+      <div class="page-layout">
+        <aside class="services-sidebar">
+          <span class="sidebar-eyebrow">Related Services</span>
+          <div class="sidebar-list">
+            <a href="home elevators"
+              ><img src="images/home elev.png" alt="Home Elevators" />Home Elevators</a
+            >
+            <a href="residential elevators"
+              ><img
+                src="images/residential elev.png"
+                alt="Residential Elevators"
+              />Residential Elevators</a
+            >
+            <a href="passenger elevators"
+              ><img
+                src="images/passenger elev.png"
+                alt="Passenger Elevators"
+              />Passenger Elevators</a
+            >
+            <a href="hospital elevators"
+              ><img
+                src="images/hospital elev.png"
+                alt="Hospital Bed Elevators"
+              />Hospital Bed Elevators</a
+            >
+            <a href="Cargo elevators"
+              ><img src="images/cargo elev.png" alt="Cargo Elevators" />Cargo
+              Elevators</a
+            >
+            <a href="panoramic elevators"
+              ><img
+                src="images/panoremic elev.png"
+                alt="Panoramic Elevators"
+              />Panoramic Elevators</a
+            >
+            <a href="Escalators"
+              ><img
+                src="images/escaltor walk elev.png"
+                alt="Escalators &amp; Moving Walks"
+              />Escalators &amp; Moving Walk</a
+            >
+            <a href="Modernization"
+              ><img
+                src="images/modern elev.png"
+                alt="Elevator Modernization"
+              />Modernization Elevators</a
+            >
+          </div>
+          <a href="services" class="sidebar-viewall"
+            >View All Services →</a
+          >
+          <div class="mini-elevator" aria-hidden="true">
+            <div class="shaft"><div class="car"></div></div>
+          </div>
+        </aside>
+        <div class="page-main">
+          <!-- Title Section -->
+          <div class="page-header">
+            <h1>Panoramic Elevators</h1>
+            <p>
+              Enhance architectural prestige and offer breathtaking views with
+              our premium glass observation elevator solutions.
+            </p>
+          </div>
+
+          <!-- Image & Overview Side-by-Side Grid -->
+          <div class="hero-overview-grid">
+            <!-- Image Banner (Left) -->
+            <div class="hero-image-card">
+              <img
+                src="images/panoremic elev.jpg"
+                alt="Nescom Panoramic Observation Elevator"
+              />
+            </div>
+
+            <!-- Product Overview (Right) -->
+            <div class="card">
+              <h2>Overview</h2>
+              <p>
+                Nescom Marketing panoramic (observation) elevators are
+                engineered to combine striking architectural aesthetics with
+                exceptional vertical transport performance. Featuring
+                high-strength safety glass enclosures and sleek stainless steel
+                frames, these lifts transform passenger travel into an engaging
+                visual experience—ideal for shopping malls, luxury hotels,
+                high-end commercial towers, and modern residential buildings.
+              </p>
+            </div>
+          </div>
+
+          <!-- Key Features (3 Items Only) -->
+          <div class="card">
+            <h2>Key Features</h2>
+            <div class="grid">
+              <div class="grid-item">
+                <h3>Shatterproof Glass Enclosures</h3>
+                <p>
+                  Constructed with ultra-clear, high-durability laminated safety
+                  glass designed to provide maximum transparency and total
+                  passenger safety.
+                </p>
+              </div>
+              <div class="grid-item">
+                <h3>Custom Architectural Profiles</h3>
+                <p>
+                  Available in semi-circular, square, diamond, or bespoke
+                  geometric cabin shapes to seamlessly blend with your
+                  building's exterior or atrium design.
+                </p>
+              </div>
+              <div class="grid-item">
+                <h3>Smooth &amp; Silent VVVF Drive</h3>
+                <p>
+                  Advanced variable frequency drives deliver whisper-quiet
+                  operation, pinpoint floor leveling, and ultra-smooth
+                  acceleration.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Why Choose Us Section -->
+          <div class="card">
+            <h2>Why Choose Us</h2>
+            <p style="margin-bottom: 1.2rem">
+              With over 15 years experience and a real focus on customer
+              satisfaction, you can rely on us for your next project. We provide
+              a professional renovation and installation services with a real
+              focus on customer satisfaction.
+            </p>
+            <div class="grid">
+              <div class="grid-item">
+                <h3>Financial Responsibility</h3>
+                <p>Financial Responsibility to Our Clients</p>
+              </div>
+              <div class="grid-item">
+                <h3>Superior Quality</h3>
+                <p>Superior Quality and Craftsmanship</p>
+              </div>
+              <div class="grid-item">
+                <h3>Quality &amp; Value</h3>
+                <p>Quality and Value to the Projects We Deliver</p>
+              </div>
+              <div class="grid-item">
+                <h3>Cost Control</h3>
+                <p>Highest Standards in Cost Control</p>
+              </div>
+              <div class="grid-item">
+                <h3>On Time &amp; Budget</h3>
+                <p>On Time and on Budget</p>
+              </div>
+              <div class="grid-item">
+                <h3>Customer Satisfaction</h3>
+                <p>Real Focus on Customer Satisfaction</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inquiry CTA -->
+          <div class="cta-card">
+            <h3>Looking for Panoramic Elevator Solutions?</h3>
+            <p style="color: var(--text-muted); margin-top: 0.4rem">
+              Contact our structural engineers today for technical design
+              consultations, site evaluations, and customized quotations.
+            </p>
+            <a href="contact" class="cta-btn">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <section class="contact-section pad" id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <div class="eyebrow" style="color: #e7b9a8">Let's get in touch</div>
+          <h2 class="contact-title" style="margin-top: 1rem">
+            Start your <span class="accent">lift</span> project.
+          </h2>
+          <p style="opacity: 0.8; max-width: 42ch; line-height: 1.7; font-size: 1rem; margin-top: 1.4rem;">Whether you need a new elevator, an upgrade, or expert advice, our team is ready to help. Share a few details below and we will get back to you soon.</p>
+          
+        </div>
+        <form action="https://formsubmit.co/info@nescommarketing.com" method="POST">
+          <input type="hidden" name="_subject" value="New Website Inquiry — Nescom Marketing (Footer)">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input class="form-field" type="text" name="name" placeholder="Your Name" required />
+          <input class="form-field" type="email" name="email" placeholder="Your Email" required />
+          <input class="form-field" type="tel" name="phone" placeholder="Your Phone" />
+          <input class="form-field" type="text" name="subject" placeholder="Subject" />
+          <textarea
+            class="form-field"
+            name="message"
+            rows="3"
+            placeholder="Tell us about your project"
+            required
+          ></textarea>
+          <button class="submit-btn" type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Interactive Navigation Scripts -->
+    <script>
+      const siteNav = document.getElementById("site-nav");
+      const navToggle = document.getElementById("nav-toggle");
+      const mobilePanel = document.getElementById("mobile-panel");
+      const contactSectionEl = document.getElementById("contact");
+
+      // Scroll background effect for header
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 30) {
+          siteNav.classList.add("is-scrolled");
+        } else {
+          siteNav.classList.remove("is-scrolled");
+        }
+        if (contactSectionEl) {
+          const navHeight = siteNav.offsetHeight;
+          const contactTop = contactSectionEl.getBoundingClientRect().top;
+          siteNav.classList.toggle("nav-hidden", contactTop <= navHeight);
+        }
+      });
+
+      // Mobile Menu Toggle
+      if (navToggle && mobilePanel) {
+        navToggle.addEventListener("click", () => {
+          navToggle.classList.toggle("is-open");
+          mobilePanel.classList.toggle("open");
+        });
+      }
+
+      // Replay the fade/slide-in animation every time a section scrolls
+      const revealTargets = document.querySelectorAll(
+        ".card, .hero-image-card, .cta-card",
+      );
+      revealTargets.forEach((el) => {
+        el.style.animation = "none";
+        el.style.opacity = "0";
+      });
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const el = entry.target;
+            if (entry.isIntersecting) {
+              el.style.animation = "none";
+              void el.offsetWidth;
+              el.style.animation = "slideUp 0.6s ease-out forwards";
+            } else {
+              el.style.animation = "none";
+              el.style.opacity = "0";
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      revealTargets.forEach((el) => revealObserver.observe(el));
+    </script>
+    <script>
+      /* ================= PREMIUM GLOBAL SYSTEM (non-destructive additions) ================= */
+      (function () {
+        /* ---- Magnetic cursor for buttons ---- */
+        document.querySelectorAll(".btn").forEach((btn) => {
+          btn.style.transition =
+            "transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s ease";
+          btn.addEventListener("mousemove", (e) => {
+            const r = btn.getBoundingClientRect();
+            const x = Math.max(
+              -5,
+              Math.min(5, (e.clientX - r.left - r.width / 2) * 0.15),
+            );
+            const y = Math.max(
+              -5,
+              Math.min(5, (e.clientY - r.top - r.height / 2) * 0.35),
+            );
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+          });
+          btn.addEventListener("mouseleave", () => {
+            btn.style.transform = "translate(0,0)";
+          });
+        });
+
+        /* ---- 3D tilt for project & service cards ---- */
+        document.querySelectorAll(".project-card, .card").forEach((card) => {
+          card.style.transition = "transform 0.35s cubic-bezier(0.22,1,0.36,1)";
+          card.style.transformStyle = "preserve-3d";
+          card.style.willChange = "transform";
+          card.addEventListener("mousemove", (e) => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transform = `perspective(900px) rotateX(${py * -4}deg) rotateY(${px * 4}deg) translateY(-4px)`;
+          });
+          card.addEventListener("mouseleave", () => {
+            card.style.transform =
+              "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
+          });
+        });
+
+        /* ---- Blueprint grid reveal on page-head sections ---- */
+        document.querySelectorAll(".page-head, .hero").forEach((section) => {
+          if (getComputedStyle(section).position === "static") {
+            section.style.position = "relative";
+          }
+          const grid = document.createElement("div");
+          grid.className = "blueprint-grid";
+          grid.setAttribute("aria-hidden", "true");
+          section.prepend(grid);
+          requestAnimationFrame(() =>
+            setTimeout(() => grid.classList.add("is-visible"), 150),
+          );
+        });
+
+        /* ---- Ultra-subtle ambient particles ---- */
+        if (!window.matchMedia("(max-width: 640px)").matches) {
+          const canvas = document.createElement("canvas");
+          canvas.setAttribute("aria-hidden", "true");
+          canvas.style.cssText =
+            "position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.5;";
+          document.body.prepend(canvas);
+          const ctx = canvas.getContext("2d");
+          let w, h;
+          function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+          }
+          resize();
+          window.addEventListener("resize", resize);
+          const N = 16;
+          const particles = Array.from({ length: N }, () => ({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: 1 + Math.random() * 1.4,
+            vy: 0.06 + Math.random() * 0.1,
+            o: 0.05 + Math.random() * 0.12,
+          }));
+          function tick() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach((p) => {
+              p.y -= p.vy;
+              if (p.y < -10) {
+                p.y = h + 10;
+                p.x = Math.random() * w;
+              }
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(216,31,43,${p.o})`;
+              ctx.fill();
+            });
+            requestAnimationFrame(tick);
+          }
+          tick();
+        }
+      })();
+    </script>
+
+    <script>
+      (function () {
+        var path = location.pathname.split("/").pop() || "index";
+        try {
+          path = decodeURIComponent(path);
+        } catch (e) {}
+        path = path.toLowerCase();
+        path = path.replace(/\.html$/, "");
+        if (path === "" || path === "index") path = "index";
+
+        var serviceFiles = [
+          "home elevators",
+          "residential elevators",
+          "passenger elevators",
+          "hospital elevators",
+          "cargo elevators",
+          "panoramic elevators",
+          "escalators",
+          "modernization",
+        ];
+
+        document.querySelectorAll(".nav-links > li > a").forEach(function (a) {
+          var href = (a.getAttribute("href") || "").toLowerCase();
+          try {
+            href = decodeURIComponent(href);
+          } catch (e) {}
+          if (href === path) a.classList.add("active");
+        });
+        document.querySelectorAll(".mobile-panel a").forEach(function (a) {
+          var href = (a.getAttribute("href") || "").toLowerCase();
+          try {
+            href = decodeURIComponent(href);
+          } catch (e) {}
+          if (href === path) a.classList.add("active");
+        });
+        document.querySelectorAll(".sidebar-list a").forEach(function (a) {
+          var href = (a.getAttribute("href") || "").toLowerCase();
+          try {
+            href = decodeURIComponent(href);
+          } catch (e) {}
+          if (href === path) a.classList.add("active");
+        });
+
+        if (serviceFiles.indexOf(path) !== -1) {
+          var svc = document.querySelector(
+            '.nav-links .dropdown > a[href="services"]',
+          );
+          if (svc) svc.classList.add("active");
+          document.querySelectorAll(".dropdown-menu a").forEach(function (a) {
+            var href = (a.getAttribute("href") || "").toLowerCase();
+            try {
+              href = decodeURIComponent(href);
+            } catch (e) {}
+            if (href === path) a.classList.add("active");
+          });
+        }
+      })();
+    </script>
+            <!-- Site Footer -->
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="site-footer-grid">
+          <div class="site-footer-about">
+            <a href="index">
+              <img
+                src="images/nescom-logo-transparent.png"
+                alt="Nescom Marketing"
+                class="brand-logo"
+              />
+            </a>
+            <p>
+              Nescom Marketing designs, installs and modernizes elevators,
+              escalators and moving walks across Pakistan. We are your trusted lift solution.
+            </p>
+            <div class="social-links-wrapper">
+              <a
+                href="https://www.facebook.com/nescommarketing"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn facebook"
+                aria-label="Facebook"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+                <span>Facebook</span>
+              </a>
+              <a
+                href="https://www.instagram.com/nescommarketing/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn instagram"
+                aria-label="Instagram"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+                <span>Instagram</span>
+              </a>
+              <a
+                href="https://pk.linkedin.com/company/nescom-marketing"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn linkedin"
+                aria-label="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="site-footer-menu">
+            <h4>MENU</h4>
+            <ul>
+              <li><a href="index">Home</a></li>
+              <li><a href="about">About</a></li>
+              <li><a href="services">Services</a></li>
+              <li><a href="projects">Projects</a></li>
+              <li><a href="contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="site-footer-contact">
+            <h4>Contact Details</h4>
+            <ul>
+              <li>
+                <span class="ficon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <span>Suite # 434-A, 4th Floor, Bhayani Centre, North Nazimabad Block-M, Karachi - Pakistan (74600)</span>
+              </li>
+              <li>
+                <span class="ficon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z" />
+                  </svg>
+                </span>
+                <span>+92 21 36642110 11</span>
+              </li>
+              <li>
+                <span class="ficon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z" />
+                  </svg>
+                </span>
+                <span>+92 339 2233653</span>
+              </li>
+              <li>
+                <span class="ficon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16v16H4z" style="display:none" />
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3 7 9 6 9-6" />
+                  </svg>
+                </span>
+                <a href="mailto:info@nescommarketing.com">info@nescommarketing.com</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="site-footer-bottom">
+          <span>© 2026 Nescom Marketing. All rights reserved.</span>
+          <span
+            >Design &amp; Developed by
+            <a href="https://yourstechhub.com/" target="_blank" rel="noopener" style="color: var(--red); font-weight: 700;"
+              >Yourstechhub</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+<!-- Floating Action Menu: Get a Quote + WhatsApp -->
+    <div class="fab-container" id="fabMenu">
+      <div class="fab-options">
+        <a href="contact" class="fab-option" aria-label="Get a Quote">
+          <span class="fab-option-label">Get a Quote</span>
+          <span class="fab-option-icon quote">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+          </span>
+        </a>
+        <a
+          href="https://wa.me/923392233653?text=Hi%20Nescom%2C%20I%27d%20like%20to%20know%20more%20about%20your%20elevators."
+          class="fab-option"
+          target="_blank"
+          rel="noopener"
+          aria-label="Chat with Nescom on WhatsApp"
+        >
+          <span class="fab-option-label">WhatsApp</span>
+          <span class="fab-option-icon whatsapp">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
+              <path d="M16.004 3C9.096 3 3.5 8.55 3.5 15.4c0 2.42.665 4.68 1.823 6.62L3 29l7.2-2.28a12.94 12.94 0 0 0 5.8 1.38h.005c6.907 0 12.5-5.55 12.5-12.4C28.5 8.55 22.91 3 16.004 3Zm0 22.66c-1.9 0-3.75-.5-5.37-1.44l-.385-.225-4.27 1.35 1.375-4.13-.25-.4a10.06 10.06 0 0 1-1.55-5.41c0-5.6 4.6-10.15 10.454-10.15 2.79 0 5.42 1.08 7.395 3.04a10.26 10.26 0 0 1 3.06 7.31c0 5.6-4.6 10.05-10.46 10.05Zm5.72-7.58c-.31-.155-1.84-.905-2.125-1.01-.285-.105-.494-.155-.703.155-.21.31-.803 1.01-.986 1.22-.182.21-.364.235-.674.08-.31-.155-1.31-.48-2.494-1.53-.922-.82-1.545-1.835-1.727-2.145-.182-.31-.02-.478.137-.633.14-.14.31-.365.465-.548.155-.183.207-.31.31-.52.104-.21.052-.39-.026-.545-.077-.155-.703-1.69-.963-2.316-.254-.61-.512-.527-.703-.537l-.6-.01c-.207 0-.545.078-.83.39-.285.31-1.09 1.065-1.09 2.598 0 1.533 1.116 3.014 1.27 3.223.156.21 2.196 3.353 5.32 4.702.744.322 1.324.514 1.777.658.746.238 1.425.204 1.962.124.599-.09 1.84-.752 2.1-1.478.259-.727.259-1.35.182-1.478-.078-.13-.286-.208-.598-.363Z" />
+            </svg>
+          </span>
+        </a>
+      </div>
+      <button
+        type="button"
+        class="fab-main"
+        aria-label="Open quick actions"
+        aria-expanded="false"
+        onclick="var m=document.getElementById('fabMenu');var open=m.classList.toggle('open');this.setAttribute('aria-expanded',open);"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      </button>
+    </div>
+  </body>
+</html>
